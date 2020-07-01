@@ -1,0 +1,52 @@
+UXTerm.termName: xterm-256color
+
+UXTerm.vt100.metaSendsEscape: true
+UXTerm.vt100.saveLines: 40960
+UXTerm.vt100.scrollBar: false
+UXTerm.vt100.geometry: 120x40
+UXTerm.vt100.selectToClipboard: true
+UXTerm.vt100.backarrowKey: false
+UXTerm.ttyModes: erase ^?
+
+UXTerm*underLine: false
+UXTerm*allowBoldFonts: false
+UXTerm*boldMode: false
+UXTerm*colorMode: true
+UXTerm*colorUL: rgb:fb/ef/c6
+UXTerm*colorULMode: true
+UXTerm*colorBD: rgb:4b/71/9c
+UXTerm*colorBDMode: true
+UXTerm*cursorBlink: false
+
+UXTerm*faceName: DejaVu Sans Mono:pixelsize=18:weight=normal:width=normal:spacing=100:scalable=true
+UXTerm.vt100.renderFont: true
+
+UXTerm.vt100.translations: #override \
+    Shift <Key>Up: scroll-back(1) \n \
+    Shift <Key>Down: scroll-forw(1)
+
+! theme "Twelve"
+UXTerm*foreground: rgb:ff/ff/ff
+UXTerm*background: rgb:00/00/00
+UXTerm*color0:     rgb:00/00/00
+UXTerm*color1:     rgb:bf/72/76
+UXTerm*color2:     rgb:86/af/80
+UXTerm*color3:     rgb:96/8a/38
+UXTerm*color4:     rgb:36/73/b5
+UXTerm*color5:     rgb:9a/70/b2
+UXTerm*color6:     rgb:7a/be/cc
+UXTerm*color7:     rgb:db/db/db
+UXTerm*color8:     rgb:66/92/af
+UXTerm*color9:     rgb:e5/50/5f
+UXTerm*color10:    rgb:87/bc/87
+UXTerm*color11:    rgb:e0/d9/5c
+UXTerm*color12:    rgb:1b/85/d6
+UXTerm*color13:    rgb:ad/73/ba
+UXTerm*color14:    rgb:33/8e/aa
+UXTerm*color15:    rgb:f4/f4/f4
+
+! Emacs
+emacs.verticalScrollBars: false
+emacs.toolBar: false
+emacs.menuBar: false
+emacs.font: DejaVu Sans Mono:pixelsize=18:foundry=PfEd:weight=normal:width=normal:spacing=100:scalable=true
