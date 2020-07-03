@@ -10,6 +10,7 @@ alias 1p='apt install --simulate'
 
 alias 1u='sudo apt update'
 alias 1i='sudo apt install'
+alias 1g='sudo apt upgrade'
 alias 1x='sudo apt autoremove'
 alias 1xxx='sudo apt remove'
 
