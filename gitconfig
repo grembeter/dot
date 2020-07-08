@@ -7,7 +7,7 @@
 [core]
     abbrev = 12
     pager = less -+$LESS -R
-    editor = emacsclient -t -a=\\\"\\\"
+    editor = emacsclient -t -a=""
 [alias]
     x = clean -dffx -n
     xxx = clean -dffx
