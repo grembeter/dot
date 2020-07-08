@@ -94,8 +94,7 @@
            (string-equal "/home/gr/.Xresources" buffer-file-name)
            (string-equal "/home/gr/.zalias" buffer-file-name)
            (string-equal "/home/gr/.zshrc" buffer-file-name))
-       (setq-local vc-follow-symlinks t)
-       )))
+       (setq-local vc-follow-symlinks t))))
 (add-hook 'find-file-hook 'gr/vc-mode-hook)
 
 ;; ============================
