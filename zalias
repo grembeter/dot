@@ -42,6 +42,7 @@ alias fni='find . -iname'
 alias cal='ncal -Mb'
 alias grep='grep --color'
 alias xclip='xclip -selection clipboard'
+alias bat='batcat'
 
 alias g='git'
 alias e='emacsclient -t -a ""'                    # text version
