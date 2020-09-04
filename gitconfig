@@ -9,33 +9,40 @@
     pager = less -+$LESS -R
     editor = emacsclient -t -a=""
 [alias]
-    x = clean -dffx -n
-    xxx = clean -dffx
-    superx = "!f(){ git clean -dffx && git checkout .;};f"
-    pwd = !pwd
-    s = status --short --branch
-    su = status --short --branch --untracked-files=no
-    l =  log --format=nicer
-    lg = log --format=nicer --graph
-    ll = log --pretty=fuller --decorate
     b = branch -vv
     ba = branch -vv --all
     bD = "!f(){ git branch | awk '$1 != \"*\"' | xargs echo g b -D; };f"
-    ci = commit
     ca = commit --amend
+    ch = cherry-pick --edit -s -x
+    ci = commit
     co = checkout
     cot = checkout --track
     d = diff
-    ds = diff --stat
     di = diff --cached
+    ds = diff --stat
     h = help
-    w = worktree
-    sho = show --pretty=fuller
-    pl = pull --all -v
-    plx = pull --all -v --prune
-    ch = cherry-pick --edit -s -x
+    f = fetch --all -v
+    fx = fetch --all -v --prune
+    fxx = fetch --all -v --prune-tags
+    l =  log --format=nicer
+    lg = log --format=nicer --graph
+    ll = log --pretty=fuller --decorate
+    ls =  log --format=nicer --stat
     ls-ign = ls-files . --exclude-standard --others --ignored
     ls-unt = ls-files . --exclude-standard --others
+    ls-tag = ls-remote --tags
+    pl = pull --all -v
+    plx = pull --all -v --prune
+    pu = push -n
+    pwd = !pwd
+    s = status --short --branch
+    so = show --pretty=fuller
+    ss = show --pretty=fuller --stat
+    su = status --short --branch --untracked-files=no
+    superx = "!f(){ git clean -dffx && git checkout .;};f" # super dangerous
+    w = worktree
+    x = clean -dffx -n
+    xxx = clean -dffx                                      # dangerous
 [pretty]
     nicer = tformat:%C(auto,red)%h %C(auto,bold blue)%<(20)%an%C(auto,reset) %C(auto,green)%>(15)%cr%C(auto,reset) %C(auto,yellow)%d%C(auto,reset) %s
 
