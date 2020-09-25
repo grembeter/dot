@@ -175,6 +175,14 @@
             (org-bullets-mode 1)))
 
 ;; ============================
+;; auto-mode-alist
+;; ============================
+
+(add-to-list 'auto-mode-alist '("\\.bb\\'" . conf-mode))
+(add-to-list 'auto-mode-alist '("\\.bbappend\\'" . conf-mode))
+(add-to-list 'auto-mode-alist '("\\.bbclass\\'" . python-mode))
+
+;; ============================
 ;; c-mode
 ;; ============================
 
