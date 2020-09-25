@@ -31,8 +31,8 @@
     ls-ign = ls-files . --exclude-standard --others --ignored
     ls-unt = ls-files . --exclude-standard --others
     ls-tag = ls-remote --tags
-    pl = pull --all -v
-    plx = pull --all -v --prune
+    pl = pull --rebase --all -v
+    plx = pull --rebase --all -v --prune
     pu = push -n
     pwd = !pwd
     s = status --short --branch
