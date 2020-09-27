@@ -174,6 +174,16 @@
           (lambda ()
             (org-bullets-mode 1)))
 
+(setq org-publish-project-alist
+      `(("index"
+         :with-title nil :base-directory "~/o/"
+         :base-extension "org" :publishing-directory "~/o/html/"
+         :headline-levels 3 :section-numbers nil
+         :publishing-function org-html-publish-to-html :with-toc nil
+         :html-head-include-default-style nil
+         :html-head-include-scripts nil
+         :html-preamble nil :html-postamble t)))
+
 ;; ============================
 ;; auto-mode-alist
 ;; ============================
