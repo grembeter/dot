@@ -25,6 +25,8 @@ alias 1kg='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 
 alias 2b='source $HOME/x/env-bitbake'
 
+alias 5s='repo sync --no-clone-bundle -v'
+
 alias cd='cd -P'
 alias ..='cd ..'
 alias ...='cd ../..'
