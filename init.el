@@ -10,7 +10,7 @@
 
 ;; add the Melpa archive to the list
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.org/packages/") t)
+             '("melpa" . "https://melpa.org/packages/") t)
 
 ;; init the package infrastructure
 (package-initialize)
