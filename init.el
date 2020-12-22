@@ -22,6 +22,8 @@
 ;; install packages
 (defvar my-packages
   '(better-defaults                     ;; set up some better emacs defaults
+    dired-single                        ;; reuse the current dired
+                                        ;; buffer to visit a directory
     elpy                                ;; emacs lisp python environment
     flycheck                            ;; on the fly syntax checking
     ample-theme				;; material-theme
@@ -75,6 +77,21 @@
 (setq text-mode-hook '(lambda() (flyspell-mode t)))
 (setq flyspell-issue-message-flag nil)
 
+;; enable dired-single
+(require 'dired-single)
+(defun gr-dired-init ()
+  "Remap dired keys"
+  (define-key dired-mode-map [return] 'dired-single-buffer)
+  (define-key dired-mode-map [mouse-1] 'dired-single-buffer-mouse)
+  (define-key dired-mode-map "^"
+    (function
+     (lambda nil (interactive) (dired-single-buffer "..")))))
+
+(if (boundp 'dired-mode-map)
+    (gr-dired-init)
+  ;; it's not loaded yet, so add our bindings to the load-hook
+  (add-hook 'dired-load-hook 'gr-dired-init))
+
 ;; Monday is the 1st day
 (setq calendar-week-start-day 1)
 
@@ -96,6 +113,10 @@
            (string-equal "/home/gr/.zshrc" buffer-file-name))
        (setq-local vc-follow-symlinks t))))
 (add-hook 'find-file-hook 'gr/vc-mode-hook)
+
+(autoload 'gtags-mode "gtags" "" t)
+;; provide the default key binding
+(setq gtags-suggested-key-mapping t)
 
 ;; ============================
 ;; user details
@@ -219,6 +240,7 @@
   (setq c-argdecl-indent 0)             ;; do not indent argument decl's extra
   (setq comment-fill-column 120)
   (setq comment-column 79)
+  (gtags-mode 1)
   (c-set-style "gr")                    ;; custom c-style
   (c-toggle-hungry-state 1))            ;; hungry delete
 (add-hook 'c-mode-common-hook 'gr/c-mode-common-hook)
