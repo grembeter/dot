@@ -50,7 +50,9 @@ gr-chdir-parent() {
 zle -N gr-chdir-parent
 bindkey '^[[1;5A' gr-chdir-parent                 # C-Up
 
-export PATH="$HOME/x:$PATH"
+typeset -U path
+path=(~/x $path)
+export PATH
 
 PROMPT='%(?.%K{cyan}%F{black} ≡ %f%k %F{cyan}%m%f %F{cyan}▼%f.%K{red}%F{black} %? %f%k %F{cyan}%m%f %F{red}‼%f) %F{green}%/%f
  » '
