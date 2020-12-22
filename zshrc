@@ -7,6 +7,10 @@ HISTFILE=~/.zhist
 HISTSIZE=1000
 SAVEHIST=10000
 
+setopt AUTO_PUSHD           # push the current directory visited on the stack
+setopt PUSHD_IGNORE_DUPS    # do not store duplicates in the stack
+setopt PUSHD_SILENT         # do not print the directory stack after pushd or popd
+
 setopt notify
 unsetopt beep
 bindkey -e

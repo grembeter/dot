@@ -49,3 +49,6 @@ alias bat='batcat'
 alias g='git'
 alias e='emacsclient -t -a ""'                    # text version
 alias em='emacsclient -n -c -a ""'
+
+alias d='dirs -v'
+for index ({1..9}) alias "$index"="cd +${index}"; unset index
