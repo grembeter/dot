@@ -47,6 +47,7 @@ alias xclip='xclip -selection clipboard'
 alias bat='batcat'
 
 alias g='git'
+alias gdif='git diff --no-index'
 alias e='emacsclient -t -a ""'                    # text version
 alias em='emacsclient -n -c -a ""'
 
