@@ -23,7 +23,7 @@ alias 1kb='sudo mount /boot'
 alias 1ki='sudo make install'
 alias 1kg='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 
-alias 2b='source $HOME/x/env-bitbake'
+alias 2b='source $HOME/x/env-bitbake source-env-oe'
 
 alias 5s='repo sync --no-clone-bundle -v'
 

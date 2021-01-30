@@ -1,0 +1,35 @@
+# -*- mode: sh -*-
+
+BUILDDIR_PROMPT='%(?.%K{cyan}%F{black} ≡ %f%k %F{cyan}%m%f %F{cyan}▼%f.%K{red}%F{black} %? %f%k %F{cyan}%m%f %F{red}‼%f) %K{green} %F{black}%/%f %k
+ » '
+
+BUILDFILE=$1
+
+if [ -n "$BUILDDIR" ]; then
+    echo "::::: bitbake env is loaded, setting prompt"
+    PROMPT="$BUILDDIR_PROMPT"
+    cd -P "$BUILDDIR"
+elif [ -f "$PWD/$BUILDFILE" ]; then
+    echo "::::: sourcing $PWD/$BUILDFILE"
+    PROMPT="$BUILDDIR_PROMPT"
+    LAYERS_ROOT=$(readlink -f "$PWD")
+    shift; source ./$BUILDFILE
+    echo "$LAYERS_ROOT" > "$BUILDDIR/.layersrootdir"
+
+    alias 5b="test -d \"$BUILDDIR\" && cd -P \"$BUILDDIR\""
+    alias 5r="test -d \"$LAYERS_ROOT\" && cd -P \"$LAYERS_ROOT\""
+elif [ -f "$PWD/.layersrootdir" ]; then
+    echo "::::: found .layersrootdir, restoring bitbake env"
+    LAYERS_BUILD=$(readlink -f "$PWD")
+    LAYERS_ROOT=$(cat "$PWD/.layersrootdir")
+    if [ -d "$LAYERS_ROOT" ]; then
+        cd -P "$LAYERS_ROOT"
+        shift; source $(readlink -e "$0") "$BUILDFILE" "$LAYERS_BUILD"
+    fi
+else
+    echo " !!!  unknown environment, do not know what to do..."
+fi
+
+unset BUILDFILE
+unset LAYERS_BUILD
+unset BUILDDIR_PROMPT
