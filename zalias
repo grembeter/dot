@@ -50,6 +50,7 @@ alias g='git'
 alias gdif='git diff --no-index'
 alias e='emacsclient -t -a ""'                    # text version
 alias em='emacsclient -n -c -a ""'
+alias picog='picocom --imap lfcrlf --omap crlf'
 
 alias d='dirs -v'
 for index ({1..9}) alias "$index"="cd +${index}"; unset index
