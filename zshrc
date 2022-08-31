@@ -27,6 +27,12 @@ setopt notify
 unsetopt beep
 bindkey -e
 
+typeset -U path
+
+# prepend user path
+path=("$HOME/bin" $path)
+export PATH
+
 if [ -e ~/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE} ]; then
     source ~/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE}
 else
@@ -61,10 +67,6 @@ z-chdir-parent() {
 
 zle -N z-chdir-parent
 bindkey '^[[1;5A' z-chdir-parent                  # C-Up
-
-typeset -U path
-path=(~/x $path)
-export PATH
 
 z-set-prompt() {
     local color="${1:-$PROMPT_COLOR_DEFAULT}"
