@@ -40,5 +40,8 @@ alias g='git'
 alias gdif='git diff --no-index'
 alias picog='picocom --imap lfcrlf --omap crlf'
 
+alias ttyusb='ll /dev/ttyUSB?'
+alias ttyusbof='lsof /dev/ttyUSB?'
+
 alias reboot='sudo -k reboot'
 alias poweroff='sudo -k poweroff'
