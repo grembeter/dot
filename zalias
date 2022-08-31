@@ -3,29 +3,16 @@
 alias 0='sudo'
 alias 0v='sudo vim'
 
-alias 1s='apt search'
-alias 1h='apt show'
-alias 1l='apt list --upgradable'
-alias 1p='apt install --simulate'
+alias 1s='aptitude search'
+alias 1h='aptitude show'
+alias 1l='aptitude search "~U"'
+alias 1p='aptitude install -y --without-recommends --simulate --show-versions'
 
-alias 1u='sudo apt update'
-alias 1i='sudo apt install'
-alias 1g='sudo apt upgrade -V'
-alias 1x='sudo apt autoremove'
-alias 1xxx='sudo apt remove'
+alias 1u='sudo aptitude update && sudo aptitude search "~N"'
+alias 1i='sudo aptitude install --prompt --without-recommends --show-versions'
+alias 1g='sudo aptitude safe-upgrade'
 
-alias 1k='alias | grep ^1k'
-alias 1ks='sudo make syncconfig'
-alias 1km='sudo make menuconfig'
-alias 1kmj='sudo make -j5'
-alias 1kmm='sudo make modules_install'
-alias 1kb='sudo mount /boot'
-alias 1ki='sudo make install'
-alias 1kg='sudo grub-mkconfig -o /boot/grub/grub.cfg'
-
-alias 2b='source $HOME/x/env-bitbake source-env-oe'
-
-alias 5s='repo sync --no-clone-bundle -v'
+alias 5s='repo sync --no-clone-bundle --verbose'
 
 alias cd='cd -P'
 alias ..='cd ..'
@@ -36,9 +23,9 @@ alias ls='ls --color'
 alias ll='ls --color -l'
 alias l='ls --color -l --almost-all'
 
-alias h='history 1 | grep --color -E -e'
+alias h='cat $HISTFILE | grep --color -E -e'
 alias df='df --human-readable --print-type --portability'
-alias fx='find . -type f -print0 | xargs -0 grep --color -nH'
+alias fx='find . -type f -print0 | xargs -n10 -0 grep --color -nH'
 alias fn='find . -name'
 alias fni='find . -iname'
 alias cal='ncal -Mb'
@@ -48,9 +35,7 @@ alias bat='batcat'
 
 alias g='git'
 alias gdif='git diff --no-index'
-alias e='emacsclient -t -a ""'                    # text version
-alias em='emacsclient -n -c -a ""'
 alias picog='picocom --imap lfcrlf --omap crlf'
 
-alias d='dirs -v'
-for index ({1..9}) alias "$index"="cd +${index}"; unset index
+alias reboot='sudo -k reboot'
+alias poweroff='sudo -k poweroff'
