@@ -21,9 +21,10 @@ setopt HIST_IGNORE_DUPS     # do not enter command lines into the history list
 setopt HIST_IGNORE_ALL_DUPS # if a new command line being added to the history
                             # list duplicates an older one, the older command is
                             # removed from the list (even if it is not the
-                            # previous event).
-
-setopt notify
+                            # previous event)
+setopt NOTIFY               # report the status of background jobs immediately,
+                            # rather than waiting until just before printing a
+                            # prompt
 unsetopt beep
 bindkey -e
 
