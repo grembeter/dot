@@ -66,11 +66,21 @@ typeset -U path
 path=(~/x $path)
 export PATH
 
-PROMPT='%(?.%K{cyan}%F{black} ≡ %f%k %F{cyan}%m%f %F{cyan}▼%f.%K{red}%F{black} %? %f%k %F{cyan}%m%f %F{red}‼%f) %F{green}%/%f
- » '
-RPROMPT='%D{%H:%M}'
+z-set-prompt() {
+    local color="${1:-$PROMPT_COLOR_DEFAULT}"
+    local mark="${2:-✔}"
+
+    prompt='%(?.%K{'"${color}"'}%F{016} '"${mark}"' %f%k %F{'"${color}"'}%m%f %F{'"${color}"'}Ξ%f.%K{009}%F{016} ✗ %f%k %F{'"${color}"'}%m%f %F{009}‼%f) %F{010}%/%f
+ ; '
+}
+
+PROMPT_COLOR_DEFAULT="006"
+PROMPT_COLOR_BITBAKE="012"
+PROMPT_COLOR_BAREMETAL="011"
 
 source "$HOME/.zalias"
+
+z-set-prompt "$PROMPT_COLOR_DEFAULT"
 
 #
 # keep the posibility to store some staff apart
