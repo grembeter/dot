@@ -7,7 +7,7 @@ HISTSIZE=10000              # the maximum number of events stored in the interna
                             # history list
 SAVEHIST=100000             # the maximum number of history events to save in the
                             # history file
-HISTFILE=~/.zhist
+HISTFILE="$HOME/.zhist"
 
 setopt AUTO_PUSHD           # push the current directory visited on the stack
 setopt PUSHD_IGNORE_DUPS    # do not store duplicates in the stack
@@ -34,19 +34,19 @@ typeset -U path
 path=("$HOME/bin" $path)
 export PATH
 
-if [ -e ~/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE} ]; then
-    source ~/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE}
+if [ -e "$HOME/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE}" ]; then
+    source "$HOME/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE}"
 else
-    echo '::::: autoload zkbd && zkbd'
+    echo "tip: autoload zkbd && zkbd"
 fi
 
-[[ -n "$key[Home]" ]]      && bindkey -- "$key[Home]"      beginning-of-line
-[[ -n "$key[End]" ]]       && bindkey -- "$key[End]"       end-of-line
-[[ -n "$key[Insert]" ]]    && bindkey -- "$key[Insert]"    overwrite-mode
-[[ -n "$key[Delete]" ]]    && bindkey -- "$key[Delete]"    delete-char
-[[ -n "$key[Backspace]" ]] && bindkey -- "$key[Backspace]" backward-delete-char
-[[ -n "$key[Left]" ]]      && bindkey -- "$key[Left]"      backward-char
-[[ -n "$key[Right]" ]]     && bindkey -- "$key[Right]"     forward-char
+test -n "$key[Home]"       && bindkey -- "$key[Home]"       beginning-of-line
+test -n "$key[End]"        && bindkey -- "$key[End]"        end-of-line
+test -n "$key[Insert]"     && bindkey -- "$key[Insert]"     overwrite-mode
+test -n "$key[Delete]"     && bindkey -- "$key[Delete]"     delete-char
+test -n "$key[Backspace]"  && bindkey -- "$key[Backspace]"  backward-delete-char
+test -n "$key[Left]"       && bindkey -- "$key[Left]"       backward-char
+test -n "$key[Right]"      && bindkey -- "$key[Right]"      forward-char
 
 autoload -Uz up-line-or-beginning-search
 zle -N up-line-or-beginning-search
@@ -54,8 +54,8 @@ zle -N up-line-or-beginning-search
 autoload -Uz down-line-or-beginning-search
 zle -N down-line-or-beginning-search
 
-[[ -n "$key[Up]" ]]   && bindkey -- "$key[Up]"   up-line-or-beginning-search
-[[ -n "$key[Down]" ]] && bindkey -- "$key[Down]" down-line-or-beginning-search
+test -n "$key[Up]"         && bindkey -- "$key[Up]"         up-line-or-beginning-search
+test -n "$key[Down]"       && bindkey -- "$key[Down]"       down-line-or-beginning-search
 
 bindkey '^[[1;3D' emacs-backward-word             # M-Left
 bindkey '^[[1;3C' emacs-forward-word              # M-Right
@@ -88,6 +88,7 @@ z-set-prompt "$PROMPT_COLOR_DEFAULT"
 #
 # keep the posibility to store some staff apart
 #
-if [ -f ~/.config/zshrc ]; then
-    source ~/.config/zshrc
-fi
+test -f "$HOME/.config/zshrc" && source "$HOME/.config/zshrc"
+
+# return true
+:
