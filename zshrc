@@ -54,13 +54,13 @@ bindkey '^[[1;3D' emacs-backward-word             # M-Left
 bindkey '^[[1;3C' emacs-forward-word              # M-Right
 bindkey '^[[3;3~' kill-word                       # M-Del
 
-gr-chdir-parent() {
+z-chdir-parent() {
     cd -P ..
     zle reset-prompt
 }
 
-zle -N gr-chdir-parent
-bindkey '^[[1;5A' gr-chdir-parent                 # C-Up
+zle -N z-chdir-parent
+bindkey '^[[1;5A' z-chdir-parent                  # C-Up
 
 typeset -U path
 path=(~/x $path)
