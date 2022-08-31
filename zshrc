@@ -34,11 +34,19 @@ typeset -U path
 path=("$HOME/bin" $path)
 export PATH
 
+test -f "$HOME/.zlib"   && source "$HOME/.zlib"
+
 if [ -e "$HOME/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE}" ]; then
     source "$HOME/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE}"
 else
     echo "tip: autoload zkbd && zkbd"
 fi
+
+autoload -Uz up-line-or-beginning-search
+zle -N up-line-or-beginning-search
+
+autoload -Uz down-line-or-beginning-search
+zle -N down-line-or-beginning-search
 
 test -n "$key[Home]"       && bindkey -- "$key[Home]"       beginning-of-line
 test -n "$key[End]"        && bindkey -- "$key[End]"        end-of-line
@@ -47,13 +55,6 @@ test -n "$key[Delete]"     && bindkey -- "$key[Delete]"     delete-char
 test -n "$key[Backspace]"  && bindkey -- "$key[Backspace]"  backward-delete-char
 test -n "$key[Left]"       && bindkey -- "$key[Left]"       backward-char
 test -n "$key[Right]"      && bindkey -- "$key[Right]"      forward-char
-
-autoload -Uz up-line-or-beginning-search
-zle -N up-line-or-beginning-search
-
-autoload -Uz down-line-or-beginning-search
-zle -N down-line-or-beginning-search
-
 test -n "$key[Up]"         && bindkey -- "$key[Up]"         up-line-or-beginning-search
 test -n "$key[Down]"       && bindkey -- "$key[Down]"       down-line-or-beginning-search
 
@@ -61,27 +62,8 @@ bindkey '^[[1;3D' emacs-backward-word             # M-Left
 bindkey '^[[1;3C' emacs-forward-word              # M-Right
 bindkey '^[[3;3~' kill-word                       # M-Del
 
-z-chdir-parent() {
-    cd -P ..
-    zle reset-prompt
-}
-
 zle -N z-chdir-parent
 bindkey '^[[1;5A' z-chdir-parent                  # C-Up
-
-z-set-prompt() {
-    local color="${1:-$PROMPT_COLOR_DEFAULT}"
-    local mark="${2:-✔}"
-
-    prompt='%(?.%K{'"${color}"'}%F{016} '"${mark}"' %f%k %F{'"${color}"'}%m%f %F{'"${color}"'}Ξ%f.%K{009}%F{016} ✗ %f%k %F{'"${color}"'}%m%f %F{009}‼%f) %F{010}%/%f
- ; '
-}
-
-PROMPT_COLOR_DEFAULT="006"
-PROMPT_COLOR_BITBAKE="012"
-PROMPT_COLOR_BAREMETAL="011"
-
-source "$HOME/.zalias"
 
 z-set-prompt "$PROMPT_COLOR_DEFAULT"
 
