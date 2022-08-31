@@ -3,13 +3,25 @@
 autoload -Uz compinit
 compinit
 
+HISTSIZE=10000              # the maximum number of events stored in the internal
+                            # history list
+SAVEHIST=100000             # the maximum number of history events to save in the
+                            # history file
 HISTFILE=~/.zhist
-HISTSIZE=1000
-SAVEHIST=10000
 
 setopt AUTO_PUSHD           # push the current directory visited on the stack
 setopt PUSHD_IGNORE_DUPS    # do not store duplicates in the stack
 setopt PUSHD_SILENT         # do not print the directory stack after pushd or popd
+setopt HIST_SAVE_NO_DUPS    # when writing out the history file, older commands
+                            # that duplicate newer ones are omitted
+setopt HIST_IGNORE_SPACE    # remove command lines from the history list when
+                            # the first character on the line is a space
+setopt HIST_IGNORE_DUPS     # do not enter command lines into the history list
+                            # if they are duplicates of the previous event
+setopt HIST_IGNORE_ALL_DUPS # if a new command line being added to the history
+                            # list duplicates an older one, the older command is
+                            # removed from the list (even if it is not the
+                            # previous event).
 
 setopt notify
 unsetopt beep
