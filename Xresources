@@ -6,6 +6,7 @@ UXTerm.vt100.scrollBar: false
 UXTerm.vt100.geometry: 120x40
 UXTerm.vt100.selectToClipboard: true
 UXTerm.vt100.backarrowKey: false
+UXTerm.vt100.renderFont: true
 UXTerm.ttyModes: erase ^?
 
 UXTerm*underLine: false
