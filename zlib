@@ -7,7 +7,7 @@ PROMPT_COLOR_BITBAKE="012"
 PROMPT_COLOR_BAREMETAL="011"
 
 
-z-set-prompt() {
+g-set-prompt() {
     local color="${1:-$PROMPT_COLOR_DEFAULT}"
     local mark="${2:-✔}"
 
@@ -16,12 +16,12 @@ z-set-prompt() {
 }
 
 
-z-chdir-parent() {
+g-chdir-parent() {
     cd -P ..
     zle reset-prompt
 }
 
 
-z-picocom() {
+g-picocom() {
     picog "/dev/ttyUSB${1:-0}" -b 115200
 }

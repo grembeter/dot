@@ -62,10 +62,10 @@ bindkey '^[[1;3D' emacs-backward-word             # M-Left
 bindkey '^[[1;3C' emacs-forward-word              # M-Right
 bindkey '^[[3;3~' kill-word                       # M-Del
 
-zle -N z-chdir-parent
-bindkey '^[[1;5A' z-chdir-parent                  # C-Up
+zle -N g-chdir-parent
+bindkey '^[[1;5A' g-chdir-parent                  # C-Up
 
-z-set-prompt "$PROMPT_COLOR_DEFAULT"
+g-set-prompt "$PROMPT_COLOR_DEFAULT"
 
 #
 # keep the posibility to store some staff apart
