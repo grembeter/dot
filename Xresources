@@ -25,7 +25,7 @@ UXTerm*cursorBlink: false
 UXTerm*visualBell: true
 UXTerm*visualBellLine: true
 
-UXTerm*faceName: DejaVu Sans Mono:pixelsize=18:weight=normal:width=normal:spacing=100:scalable=true
+UXTerm*faceName: xft:Ubuntu Mono:size=13
 
 ! theme "Twelve"
 UXTerm*foreground: rgb:ff/ff/ff
@@ -51,5 +51,5 @@ UXTerm*color15:    rgb:f4/f4/f4
 emacs.verticalScrollBars: false
 emacs.toolBar: false
 emacs.menuBar: false
-emacs.font: DejaVu Sans Mono:pixelsize=18:foundry=PfEd:weight=normal:width=normal:spacing=100:scalable=true
+emacs.font: Ubuntu Mono
 emacs.cursorBlink: false
