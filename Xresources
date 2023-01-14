@@ -1,4 +1,9 @@
+! UXTerm
 UXTerm.termName: xterm-256color
+
+UXTerm.vt100.translations: #override \
+  Shift <Key>Up: scroll-back(1) \n \
+  Shift <Key>Down: scroll-forw(1)
 
 UXTerm.vt100.metaSendsEscape: true
 UXTerm.vt100.saveLines: 40960
@@ -11,7 +16,6 @@ UXTerm.ttyModes: erase ^?
 
 UXTerm*underLine: false
 UXTerm*allowBoldFonts: false
-UXTerm*boldMode: false
 UXTerm*colorMode: true
 UXTerm*colorUL: rgb:fb/ef/c6
 UXTerm*colorULMode: true
@@ -20,11 +24,6 @@ UXTerm*colorBDMode: true
 UXTerm*cursorBlink: false
 
 UXTerm*faceName: DejaVu Sans Mono:pixelsize=18:weight=normal:width=normal:spacing=100:scalable=true
-UXTerm.vt100.renderFont: true
-
-UXTerm.vt100.translations: #override \
-    Shift <Key>Up: scroll-back(1) \n \
-    Shift <Key>Down: scroll-forw(1)
 
 ! theme "Twelve"
 UXTerm*foreground: rgb:ff/ff/ff
