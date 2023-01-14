@@ -52,3 +52,4 @@ emacs.verticalScrollBars: false
 emacs.toolBar: false
 emacs.menuBar: false
 emacs.font: DejaVu Sans Mono:pixelsize=18:foundry=PfEd:weight=normal:width=normal:spacing=100:scalable=true
+emacs.cursorBlink: false
