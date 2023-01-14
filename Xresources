@@ -22,6 +22,8 @@ UXTerm*colorULMode: true
 UXTerm*colorBD: rgb:4b/71/9c
 UXTerm*colorBDMode: true
 UXTerm*cursorBlink: false
+UXTerm*visualBell: true
+UXTerm*visualBellLine: true
 
 UXTerm*faceName: DejaVu Sans Mono:pixelsize=18:weight=normal:width=normal:spacing=100:scalable=true
 
