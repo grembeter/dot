@@ -65,6 +65,9 @@ bindkey '^[[3;3~' kill-word                       # M-Del
 zle -N g-chdir-parent
 bindkey '^[[1;5A' g-chdir-parent                  # C-Up
 
+# turn off CTRL-S freeze and unblock history-incremental-search-forward
+stty -ixon
+
 g-set-prompt "$PROMPT_COLOR_DEFAULT"
 
 #
