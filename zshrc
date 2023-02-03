@@ -25,7 +25,7 @@ setopt HIST_IGNORE_ALL_DUPS # if a new command line being added to the history
 setopt NOTIFY               # report the status of background jobs immediately,
                             # rather than waiting until just before printing a
                             # prompt
-unsetopt beep
+unsetopt BEEP               # turn off all beeps
 bindkey -e
 
 typeset -U path
