@@ -62,13 +62,17 @@ bindkey '^[[1;3D' emacs-backward-word             # M-Left
 bindkey '^[[1;3C' emacs-forward-word              # M-Right
 bindkey '^[[3;3~' kill-word                       # M-Del
 
-zle -N g-chdir-parent
-bindkey '^[[1;5A' g-chdir-parent                  # C-Up
+if command -v g-chdir-parent > /dev/null; then
+    zle -N g-chdir-parent
+    bindkey '^[[1;5A' g-chdir-parent              # C-Up
+fi
 
 # turn off CTRL-S freeze and unblock history-incremental-search-forward
 stty -ixon
 
-g-set-prompt "$PROMPT_COLOR_DEFAULT"
+if command -v g-set-prompt > /dev/null; then
+    g-set-prompt "$PROMPT_COLOR_DEFAULT"
+fi
 
 #
 # keep the posibility to store some staff apart
