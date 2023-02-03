@@ -1,7 +1,3 @@
-# -*- mode: sh -*-
-
-test -f "$HOME/.zalias" && source "$HOME/.zalias"
-
 PROMPT_COLOR_DEFAULT="006"
 PROMPT_COLOR_BITBAKE="012"
 PROMPT_COLOR_BAREMETAL="011"

@@ -1,5 +1,3 @@
-# -*- mode: sh -*-
-
 alias 0='sudo'
 alias 0v='sudo vim'
 

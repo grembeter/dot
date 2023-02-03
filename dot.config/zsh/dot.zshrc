@@ -34,7 +34,12 @@ typeset -U path
 path=("$HOME/bin" $path)
 export PATH
 
-test -f "$HOME/.zlib"   && source "$HOME/.zlib"
+g-source-path() {
+    test -f "$1" && source "$1"
+}
+
+g-source-path "$ZDOTDIR/lib/aliases.zsh"
+g-source-path "$ZDOTDIR/lib/main.zsh"
 
 if [ -e "$HOME/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE}" ]; then
     source "$HOME/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE}"
@@ -77,7 +82,7 @@ fi
 #
 # keep the posibility to store some staff apart
 #
-test -f "$HOME/.config/zshrc" && source "$HOME/.config/zshrc"
+g-source-path "$HOME/.config/zshrc"
 
 # return true
 :
