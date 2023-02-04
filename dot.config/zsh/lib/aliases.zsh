@@ -4,7 +4,7 @@ alias 0v='sudo vim'
 alias 1s='aptitude search'
 alias 1h='aptitude show'
 alias 1l='aptitude search "~U"'
-alias 1p='aptitude install -y --without-recommends --simulate --show-versions'
+alias 1p='aptitude install --assume-yes --without-recommends --simulate --show-versions'
 
 alias 1u='sudo aptitude update && sudo aptitude search "~N"'
 alias 1i='sudo aptitude install --prompt --without-recommends --show-versions'
