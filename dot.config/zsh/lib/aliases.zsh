@@ -10,7 +10,8 @@ alias 1u='sudo aptitude update && sudo aptitude search "~N"'
 alias 1i='sudo aptitude install --prompt --without-recommends --show-versions'
 alias 1g='sudo aptitude safe-upgrade'
 
-alias 2e='. ~/bin/env-bitbake'
+alias 2b='. env-bitbake'
+alias 2t='. env-toolchain'
 alias 2s='g-chdir-repo'
 
 alias 3='g-ttyusb'

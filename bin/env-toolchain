@@ -1,0 +1,20 @@
+# -*- mode: sh -*-
+
+if echo "$ZSH_EVAL_CONTEXT" | grep -qEe ':file$'; then
+    X_TOOLCHAIN_PATH="${1:-/opt/gcc-arm-none-eabi/bin}"
+
+    test -d "$X_TOOLCHAIN_PATH" \
+        || print -P " %F{red}✗%f cross path" \
+                 "is not a directory: $X_TOOLCHAIN_PATH" >&2
+
+    path=("$X_TOOLCHAIN_PATH" $path)
+    export PATH
+
+    print -P " %F{green}»%f PATH=$PATH"
+
+    test -n "$PROMPT_COLOR_BAREMETAL" \
+        && command -v g-set-prompt > /dev/null \
+        && g-set-prompt "$PROMPT_COLOR_BAREMETAL" "♮"
+
+    unset X_TOOLCHAIN_PATH
+fi

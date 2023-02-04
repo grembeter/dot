@@ -27,4 +27,4 @@ fi
 test -d "$BUILDDIR" \
     && test -n "$PROMPT_COLOR_BITBAKE" \
     && command -v g-set-prompt > /dev/null \
-    && g-set-prompt "$PROMPT_COLOR_BITBAKE" "b"
+    && g-set-prompt "$PROMPT_COLOR_BITBAKE" "♭"
