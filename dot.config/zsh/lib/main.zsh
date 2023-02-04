@@ -3,6 +3,9 @@ PROMPT_COLOR_BITBAKE="012"
 PROMPT_COLOR_BAREMETAL="011"
 
 
+#
+# set shell prompt
+#
 g-set-prompt() {
     local color="${1:-$PROMPT_COLOR_DEFAULT}"
     local mark="${2:-✔}"
@@ -11,13 +14,17 @@ g-set-prompt() {
  ; '
 }
 
-
+#
+# move to parent dir (for keybinding)
+#
 g-chdir-parent() {
     cd -P ..
     zle reset-prompt
 }
 
-
+#
+# run terminal emulation program with predefined device and baudrate
+#
 g-picocom() {
     picog "/dev/ttyUSB${1:-0}" -b "${2:-115200}"
 }
