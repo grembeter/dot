@@ -42,3 +42,10 @@ g-chdir-repo() {
     layersrootenv=$(dirname $(readlink "$layersrootenv"))
     test -d "$layersrootenv" && cd "$layersrootenv"
 }
+
+#
+# show path to bitbake packages work dir
+#
+g-list-work() {
+    ls --directory "${BUILDDIR:-$PWD}/${2:-tmp}"/work/*/$1/*
+}
