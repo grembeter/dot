@@ -19,5 +19,5 @@ g-chdir-parent() {
 
 
 g-picocom() {
-    picog "/dev/ttyUSB${1:-0}" -b 115200
+    picog "/dev/ttyUSB${1:-0}" -b "${2:-115200}"
 }
