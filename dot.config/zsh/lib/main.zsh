@@ -8,9 +8,9 @@ PROMPT_COLOR_BAREMETAL="011"
 #
 g-set-prompt() {
     local color="${1:-$PROMPT_COLOR_DEFAULT}"
-    local mark="${2:-✔}"
+    local mark="${2:-»}"
 
-    prompt='%(?.%K{'"${color}"'}%F{016} '"${mark}"' %f%k %F{'"${color}"'}%m%f %F{'"${color}"'}Ξ%f.%K{009}%F{016} ✗ %f%k %F{'"${color}"'}%m%f %F{009}‼%f) %F{010}%/%f
+    prompt='%(?.%F{'"${color}"'}## %m %F{015}'"${mark}"'%f.%F{009}?? %F{'"${color}"'}%m %F{009}✗%f) %F{010}%/%f
  ; '
 }
 
