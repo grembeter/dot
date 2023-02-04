@@ -28,3 +28,17 @@ g-chdir-parent() {
 g-picocom() {
     picog "/dev/ttyUSB${1:-0}" -b "${2:-115200}"
 }
+
+#
+# move to layers root dir
+#
+# A convenient way to move to repo directory in bitbake environment.
+# $BUILDDIR is set by OE environment setup script and .layersrootenv
+# symlink is created by env-bitbake setup script.
+#
+g-chdir-repo() {
+    local layersrootenv="${BUILDDIR:-$PWD}"/.layersrootenv
+    test -L "$layersrootenv" || return
+    layersrootenv=$(dirname $(readlink "$layersrootenv"))
+    test -d "$layersrootenv" && cd "$layersrootenv"
+}

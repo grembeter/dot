@@ -11,7 +11,7 @@ alias 1i='sudo aptitude install --prompt --without-recommends --show-versions'
 alias 1g='sudo aptitude safe-upgrade'
 
 alias 2e='. ~/bin/env-bitbake'
-alias 2s='test -d $(dirname $(readlink $BUILDDIR/.layersrootenv)) && cd $(dirname $(readlink $BUILDDIR/.layersrootenv))'
+alias 2s='g-chdir-repo'
 
 alias 5s='repo sync --no-clone-bundle --verbose'
 
