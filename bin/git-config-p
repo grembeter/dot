@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+conf="$HOME/.config/git/personal.conf"
+
+if [ -n "$1" ]; then
+    ln --symbolic --force "$1.conf" "$conf"
+    readlink "$conf"
+    cat "$conf"
+fi

@@ -51,4 +51,4 @@
 # keep personal details (user name, email) separately
 #
 [include]
-    path = ~/.config/gitconfig
+    path = ~/.config/git/personal.conf
