@@ -1,8 +1,5 @@
 # -*- mode: sh -*-
 
-autoload -Uz compinit
-compinit
-
 HISTSIZE=10000              # the maximum number of events stored in the internal
                             # history list
 SAVEHIST=100000             # the maximum number of history events to save in the
@@ -40,6 +37,7 @@ g-source-path() {
 
 g-source-path "$ZDOTDIR/lib/aliases.zsh"
 g-source-path "$ZDOTDIR/lib/main.zsh"
+g-source-path "$ZDOTDIR/lib/completions.zsh"
 
 if [ -e "$HOME/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE}" ]; then
     source "$HOME/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE}"
