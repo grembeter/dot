@@ -49,3 +49,53 @@ g-chdir-repo() {
 g-list-work() {
     ls --directory "${BUILDDIR:-$PWD}/${2:-tmp}"/work/*/$1/*
 }
+
+#
+# list ipk files
+#
+g-ipk-data() {
+    local pkg
+    for pkg in "$@"; do
+        test -f "$pkg" || continue
+        echo "# $pkg"
+        ar p "$pkg" data.tar.xz | tar Jtf -
+    done
+}
+
+#
+# show ipk control file
+#
+g-ipk-control() {
+    local pkg
+    for pkg in "$@"; do
+        test -f "$pkg" || continue
+        echo "# $pkg"
+        ar p "$pkg" control.tar.gz | tar zxOf - ./control
+    done
+}
+
+#
+# search through ipk packages
+#
+g-ipk-regexp() {
+    local regexp="${1:-^Depends: .*bash}"
+    local ipkdir="${2:-$PWD}"
+    local pkg
+
+    for pkg in $(find "$ipkdir" -name "*.ipk" | sort); do
+        test -f "$pkg" || continue
+        ar p "$pkg" control.tar.gz | tar zxOf - ./control \
+            | perl -sne 'print "# $pkg\n$_" if (/$regexp/)' \
+                   -- -regexp="$regexp" -pkg="$pkg"
+    done
+}
+
+#
+# show ipk packages, that have specified dependencies
+#
+g-ipk-depends() {
+    local regexp="^Depends: .*$1"
+    local ipkdir="${2:-$PWD}"
+
+    g-ipk-regexp "$regexp" "$ipkdir"
+}
