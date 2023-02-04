@@ -13,6 +13,12 @@ alias 1g='sudo aptitude safe-upgrade'
 alias 2e='. ~/bin/env-bitbake'
 alias 2s='g-chdir-repo'
 
+alias 3='g-ttyusb'
+alias 3l='g-ttyusbls'
+alias 3o='lsof /dev/ttyUSB?'
+alias 3x='ls --color -l /tmp/picocom.*.log'
+alias 3xxx='rm -vf /tmp/picocom.*.log'
+
 alias 5s='repo sync --no-clone-bundle --verbose'
 
 alias cd='cd -P'
@@ -36,10 +42,6 @@ alias bat='batcat'
 
 alias g='git'
 alias gdif='git diff --no-index'
-alias picog='picocom --imap lfcrlf --omap crlf'
-
-alias ttyusb='ll /dev/ttyUSB?'
-alias ttyusbof='lsof /dev/ttyUSB?'
 
 alias reboot='sudo -k reboot'
 alias poweroff='sudo -k poweroff'
