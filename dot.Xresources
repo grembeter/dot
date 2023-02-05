@@ -51,6 +51,7 @@ UXTerm*color15:    rgb:f4/f4/f4
 emacs.verticalScrollBars: false
 emacs.toolBar: false
 emacs.menuBar: false
+emacs.fontBackend: xft
 emacs.font: Ubuntu Mono
 emacs.cursorBlink: false
 
