@@ -25,7 +25,7 @@ UXTerm*cursorBlink: false
 UXTerm*visualBell: true
 UXTerm*visualBellLine: true
 
-UXTerm*faceName: xft:Ubuntu Mono:size=13
+UXTerm*faceName: xft:Monoid:style=Retina:size=10,xft:Ubuntu Mono:size=13
 
 ! theme "Twelve"
 UXTerm*foreground: rgb:ff/ff/ff
