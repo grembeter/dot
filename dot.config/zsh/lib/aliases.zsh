@@ -30,6 +30,7 @@ alias ....='cd ../..'                             # same as previous
 alias ls='ls --color'
 alias ll='ls --color -l'
 alias l='ls --color -l --almost-all'
+alias in='g-lsin'
 
 alias em='emacsclient -a "" -c -n'
 alias emt='emacsclient -a "" -t'
