@@ -1,13 +1,18 @@
 # -*- mode: conf -*-
 
+[init]
+    defaultBranch = mainline
 [color]
     ui = auto
+[pull]
+    ff = only
 [push]
     default = simple
 [core]
     abbrev = 12
     pager = less -+$LESS -R
-    editor = emacsclient -t -a=""
+[status]
+    showUntrackedFiles = all
 [alias]
     b = branch -vv
     ba = branch -vv --all
