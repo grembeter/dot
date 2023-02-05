@@ -31,6 +31,10 @@ alias ls='ls --color'
 alias ll='ls --color -l'
 alias l='ls --color -l --almost-all'
 
+alias em='emacsclient -a "" -c -n'
+alias emt='emacsclient -a "" -t'
+alias emx='emacsclient -a "" -c'
+
 alias h='cat $HISTFILE | grep --color -E -e'
 alias df='df --human-readable --print-type --portability'
 alias fx='find . -type f -print0 | xargs -n10 -0 grep --color -nH'
