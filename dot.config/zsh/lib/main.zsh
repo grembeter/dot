@@ -120,3 +120,18 @@ g-ipk-depends() {
 
     g-ipk-regexp "$regexp" "$ipkdir"
 }
+
+#
+# list the newest files in downloads
+#
+g-lsin() {
+    local dir="$HOME/in"
+
+    if [ $# -ne 0 ]; then
+        ls --color=never -1 --quoting-style=shell-always -t "$dir"/* \
+            | cat -n | head -n20 | sort -r -n \
+            | awk '$1 == '"$1"' {$1=""; print}'
+    else
+        ls -1 --quoting-style=shell-always -t "$dir" | cat -n | head -n20 | sort -r -n
+    fi
+}
