@@ -1,0 +1,43 @@
+general {
+    colors = true
+    interval = 10
+}
+
+order += "disk /"
+order += "volume master"
+order += "wireless _first_"
+order += "battery 0"
+order += "tztime local"
+
+disk "/" {
+    format = " %avail"
+}
+
+volume master {
+    format = "♫ %volume"
+    format_muted = "♪ %volume"
+    device = "pulse:0"
+    mixer = "Master"
+    mixer_idx = 0
+}
+
+wireless _first_ {
+    format_up = " %quality %essid"
+    format_down = ""
+}
+
+battery 0 {
+    format = "%status %percentage %remaining"
+    status_bat = ""
+    status_chr = ""
+    status_full = ""
+    low_threshold = 30
+    threshold_type = percentage
+    integer_battery_capacity = true
+    color_good = "#0000FF"
+}
+
+tztime local {
+    format = " %h %d, %H:%M"
+}
+

@@ -1,0 +1,28 @@
+#!/usr/bin/env zsh
+
+T590_PATH="/sys/class/backlight/intel_backlight"
+
+tune=${1:-"+1000%"}
+
+if ! echo "$tune" | grep -qEe '^[-+]?[0-9]+$'; then
+    echo "unknown argument: $tune" >&2
+    exit 1
+fi
+
+current_brightness=$(cat "$T590_PATH/brightness")
+max_brightness=$(cat "$T590_PATH/max_brightness")
+min_brightness=1
+
+echo "current_brightness .... $current_brightness" >&2
+echo "max_brightness ........ $max_brightness" >&2
+let "new_brightness = $current_brightness + $tune"
+echo "new_brightness ........ $new_brightness" >&2
+
+if [ $new_brightness -ge $max_brightness ]; then
+    new_brightness=$max_brightness
+elif [ $new_brightness -le $min_brightness ]; then
+    new_brightness=$min_brightness
+fi
+
+echo "real_brightness ........ $new_brightness" >&2
+echo "$new_brightness" > "$T590_PATH/brightness"
