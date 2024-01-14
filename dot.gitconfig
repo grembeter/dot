@@ -17,6 +17,7 @@
     b = branch -vv
     ba = branch -vv --all
     bD = "!f(){ git branch | awk '$1 != \"*\"' | xargs echo g b -D; };f"
+    bDx = "!f(){ git branch | awk '$1 != \"*\"' | xargs git branch -D; };f"
     ca = commit --amend
     ch = cherry-pick --edit -s -x
     ci = commit
