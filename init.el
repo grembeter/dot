@@ -1,278 +1,308 @@
-;; init.el
+;;; init.el
 
 ;; ============================
 ;; MELPA package support
 ;; ============================
 
-;; enable basic packaging support
-
 (require 'package)
+(package-initialize)
 
-;; add the Melpa archive to the list
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
 
-;; init the package infrastructure
-(package-initialize)
-
-;; if there is no archived package contents, refresh them
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-;; install packages
-(defvar my-packages
-  '(better-defaults                     ;; set up some better emacs defaults
-    dired-single                        ;; reuse the current dired
-                                        ;; buffer to visit a directory
-    elpy                                ;; emacs lisp python environment
-    flycheck                            ;; on the fly syntax checking
-    ample-theme				;; material-theme
-    ggtags                              ;; GNU Global
-    py-autopep8                         ;; run autopep8 on save
-    blacken                             ;; black formatting on save
-    magit                               ;; git integration
-    deft                                ;; mode for quickly browsing
-    winner                              ;; undo and redo window configuration
-    markdown-mode                       ;; covers Markdown syntax
-    org-bullets))                       ;; replace all headline markers
-                                        ;;   with different Unicode bullets
-
-;; scans the list in my-packages and install required
-(mapc #'(lambda (package)
-          (unless (package-installed-p package)
-            (package-install package)))
-      my-packages)
+(when (not (package-installed-p 'use-package))
+  (package-install 'use-package))
 
 ;; ============================
 ;; basic customization
 ;; ============================
 
-(require 'better-defaults)
-(setq inhibit-startup-message t)        ;; hide the startup message
-(load-theme 'ample t)			;; load theme
-(setq make-backup-files nil)
-(setq auto-save-default nil)
-(setq scroll-step 1)                    ;; keyboard scroll one line at a time
-(setq scroll-conservatively 10000)
-(setq scroll-margin 4)
+(setq custom-file (concat user-emacs-directory "custom.el"))
+(load custom-file)
 
-;; ============================
-;; development customization
-;; ============================
+;; inhibit the startup screen
+(setq inhibit-startup-message t)
+(setq initial-scratch-message nil)
 
-;; enable elpy
-(elpy-enable)
-(setq elpy-rpc-python-command "python3")
+;; helps to disable cursor blinking
+(setq visible-cursor nil)
 
-;; enable flycheck
-(when (require 'flycheck nil t)
-  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-  (add-hook 'elpy-mode-hook 'flycheck-mode))
-
-;; enable autopep8
-(require 'py-autopep8)
-(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
-
-;; enable flyspell
-(setq text-mode-hook '(lambda() (flyspell-mode t)))
-(setq flyspell-issue-message-flag nil)
-
-;; enable dired-single
-(require 'dired-single)
-(defun gr-dired-init ()
-  "Remap dired keys"
-  (define-key dired-mode-map [return] 'dired-single-buffer)
-  (define-key dired-mode-map [mouse-1] 'dired-single-buffer-mouse)
-  (define-key dired-mode-map "^"
-    (function
-     (lambda nil (interactive) (dired-single-buffer "..")))))
-
-(if (boundp 'dired-mode-map)
-    (gr-dired-init)
-  ;; it's not loaded yet, so add our bindings to the load-hook
-  (add-hook 'dired-load-hook 'gr-dired-init))
+;; keyboard scroll one line at a time
+(setq scroll-step 1
+      scroll-margin 4
+      scroll-conservatively 10000)
 
 ;; Monday is the 1st day
 (setq calendar-week-start-day 1)
 
-;; enable winner-mode
-(winner-mode 1)
+;; don't use the compiled code if its the older package
+(setq load-prefer-newer t)
 
-;; 
-(defun gr/vc-mode-hook ()
-  (message buffer-file-name)
-  (when
-      (and
-       (file-exists-p (buffer-file-name))
-       (stringp buffer-file-name)
-       (or (string-equal "/home/gr/.emacs.d/init.el" buffer-file-name)
-           (string-equal "/home/gr/.gitconfig" buffer-file-name)
-           (string-equal "/home/gr/.vimrc" buffer-file-name)
-           (string-equal "/home/gr/.Xresources" buffer-file-name)
-           (string-equal "/home/gr/.zalias" buffer-file-name)
-           (string-equal "/home/gr/.zshrc" buffer-file-name))
-       (setq-local vc-follow-symlinks t))))
-(add-hook 'find-file-hook 'gr/vc-mode-hook)
+;; backup all files into one directory
+(setq backup-directory-alist
+      `(("." . ,(concat user-emacs-directory "backups"))))
 
-(autoload 'gtags-mode "gtags" "" t)
-;; provide the default key binding
-(setq gtags-suggested-key-mapping t)
+;; use spaces by default
+(setq-default tab-width 4
+              indent-tabs-mode nil)
 
-;; ============================
-;; user details
-;; ============================
-
-(load "~/.config/emacs" t)
-
-;; ============================
-;; indentation
-;; ============================
-
-(setq tab-width 4)
-
-;; ============================
-;; yes or no
-;; ============================
-
-(defalias 'yes-or-no-p 'y-or-n-p)
-
-;; ============================
-;; empty lines
-;; ============================
-
+;; visually indicate empty lines after the buffer end
 (setq-default indicate-empty-lines t)
 (when (not indicate-empty-lines)
   (toggle-indicate-empty-lines))
 
-;; ============================
-;; marking text
-;; ============================
+;; do not show tool bar
+(when (fboundp 'tool-bar-mode)
+  (tool-bar-mode -1))
 
-(delete-selection-mode t)
-(transient-mark-mode t)
-(setq x-select-enable-clipboard t)
+;; do not show scroll bar
+(when (fboundp 'scroll-bar-mode)
+  (scroll-bar-mode -1))
 
-;; ============================
-;; autopair
-;; ============================
+;; do not show menu bar
+(when (fboundp 'menu-bar-mode)
+  (menu-bar-mode -1))
 
-(electric-pair-mode t)
+(save-place-mode 1)
 
-;; ============================
-;; notmuch
-;; ============================
+(column-number-mode t)
 
-(autoload 'notmuch "notmuch" "notmuch mail" t)
+;; makes killing/yanking interact with the clipboard
+(setq-default x-select-enable-clipboard t)
 
-;; ============================
-;; spelling
-;; ============================
+;; Save clipboard strings into kill ring before replacing them. When
+;; one selects something in another program to paste it into Emacs, but
+;; kills something in Emacs before actually pasting it, this selection
+;; is gone unless this variable is non-nil.
+(setq-default save-interprogram-paste-before-kill t)
 
-(executable-find "aspell")
-(setq ispell-program-name "aspell")
-(setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US"))
+;; shows all options when running apropos
+(setq-default apropos-do-all t)
 
-;; ============================
-;; cursor
-;; ============================
+;; mouse yank commands yank at point instead of at click
+(setq-default mouse-yank-at-point t)
 
-(blink-cursor-mode 0)
-(setq visible-cursor nil)
+;; single character is enough, SPC also means yes, and DEL means no,
+;; fset is for where global substitution is the right thing to do
+(fset 'yes-or-no-p 'y-or-n-p)
 
-;; ============================
-;; deft
-;; ============================
+;; superior rectangle handling but with the standard
+;; kill/copy/yank/undo interface
+(cua-selection-mode t)
 
-(setq deft-directory "~/o")
-(setq deft-recursive t)
+;; unbind `suspend-frame` to avoid accidentally iconify emacs
+(global-unset-key (kbd "C-z"))
+(global-set-key (kbd "C-x w") 'revert-buffer)
 
-;; ============================
-;; org
-;; ============================
+;; delete whitespace just when a file is saved
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-(setq org-hide-emphasis-markers nil)
-(add-hook 'org-mode-hook
-          (lambda ()
-            (org-bullets-mode 1)))
+;; enable narrowing commands
+(put 'narrow-to-region 'disabled nil)
+(put 'narrow-to-page 'disabled nil)
 
-(setq org-publish-project-alist
-      `(("index"
-         :with-title nil :base-directory "~/o/"
-         :base-extension "org" :publishing-directory "~/o/html/"
-         :headline-levels 3 :section-numbers nil
-         :publishing-function org-html-publish-to-html :with-toc nil
-         :html-head-include-default-style nil
-         :html-head-include-scripts nil
-         :html-preamble nil :html-postamble t)))
+(defun toggle-comment-on-line ()
+  "Comment or uncomment current line."
+  (interactive)
+  (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
 
-;; ============================
-;; auto-mode-alist
-;; ============================
+(global-set-key (kbd "C-;") 'toggle-comment-on-line)
 
-(add-to-list 'auto-mode-alist '("\\.bb\\'" . conf-mode))
-(add-to-list 'auto-mode-alist '("\\.bbappend\\'" . conf-mode))
-(add-to-list 'auto-mode-alist '("\\.bbclass\\'" . python-mode))
+;; toggle Display-Line-Numbers mode in all buffers
+;; (global-display-line-numbers-mode)
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
-;; ============================
-;; c-mode
-;; ============================
+;; set cross environment
+(setenv "PATH" (concat
+                "/opt/gcc-arm-none-eabi/bin" ":"
+                (getenv "PATH")))
 
-(defconst gr/c-style
-  '((c-backslash-column . 80) 
-    (c-backslash-max-column . 100)
-    (c-basic-offset . 4)
-    (c-continued-statement-offset 4)
-    (c-echo-syntactic-information-p . t)
-    (c-offsets-alist .
-		     ((inextern-lang . 0)
-		      (substatement . 0)
-		      (statement-case-intro . 0)
-		      (substatement-open . 0)
-		      (case-label . +)
-		      (block-open . 0))))
-  "C programming style")
-(c-add-style "gr" gr/c-style)
+(require 'use-package)
 
-(defun gr/c-mode-common-hook ()
-  (setq c-tab-always-indent t)
-  (setq c-indent-level 4)               ;; a TAB is equivilent to four spaces
-  (setq c-indent-tabs-mode t)           ;; pressing TAB causes indentation
-  (setq c-argdecl-indent 0)             ;; do not indent argument decl's extra
-  (setq comment-fill-column 120)
-  (setq comment-column 79)
-  (gtags-mode 1)
-  (c-set-style "gr")                    ;; custom c-style
-  (c-toggle-hungry-state 1))            ;; hungry delete
-(add-hook 'c-mode-common-hook 'gr/c-mode-common-hook)
-(add-hook 'c++-mode-common-hook 'gr/c-mode-common-hook)
+(use-package ispell
+  :ensure t
+  :config
+  (setq ispell-program-name "hunspell")
+  ;; (setq-default ispell-local-dictionary "en_US")
+  ;; (setq-default ispell-local-dictionary-alist
+  ;;               '(("en_US" "[[:alpha:]]" "[^[:alpha:]]"
+  ;;                  "[']" nil ("-d" "en_US,de_DE,de_CH,uk_UA")
+  ;;                  nil utf-8)))
+  :bind
+  (("C-c w" . 'ispell-word)
+   ("C-c r" . 'ispell-region)
+   ("C-c b" . 'ispell-buffer)))
 
-(global-linum-mode t)
-(setq linum-format
-      (lambda (line)
-        (propertize
-         (format
-          (let
-              ((w (length
-                   (number-to-string (count-lines (point-min) (point-max))))))
-            (concat "%" (number-to-string w) "d "))
-          line)
-         'face 'linum)))
+(use-package ujelly-theme
+  :ensure t
+  :config
+  (load-theme 'ujelly t)
+  ;; highlight current line in all buffers
+  (global-hl-line-mode t)
+  ;; give a chance for emacsclient
+  (add-hook 'after-make-frame-functions
+            (lambda (frame)
+              (select-frame frame)
+              (when (display-graphic-p frame)
+                (load-theme 'ujelly t)))))
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(column-number-mode t)
- '(menu-bar-mode nil)
- '(package-selected-packages
-   (quote
-    (markdown-mode org-bullets deft magit blacken py-autopep8 ggtags ample-theme flycheck elpy better-defaults)))
- '(show-paren-mode t)
- '(tool-bar-mode nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+(use-package company
+  :ensure t
+  :bind (:map company-active-map
+         ("C-n" . company-select-next)
+         ("C-p" . company-select-previous))
+  :config
+  (setq company-idle-delay 0.3)
+  (global-company-mode t))
+
+(use-package delight
+  :ensure t
+  :delight)
+
+(use-package uniquify
+  :ensure nil
+  :config
+  (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
+  :delight)
+
+(use-package recentf
+  :ensure t
+  :config
+  (setq recentf-auto-cleanup 'never
+        recentf-max-saved-items 1000
+        recentf-save-file (concat user-emacs-directory ".recentf"))
+  (recentf-mode t)
+  :delight)
+
+(use-package ibuffer
+  :ensure t
+  :bind ("C-x C-b" . ibuffer)
+  :delight)
+
+(use-package projectile
+  :ensure t
+  :config
+  ;; use it everywhere
+  (projectile-mode t)
+  :bind ("C-x f" . projectile-find-file)
+  :delight)
+
+(use-package python
+  :ensure t
+  :custom
+  (python-indent-offset 4)
+  :delight)
+
+(use-package rainbow-delimiters
+  :ensure t
+  :config
+  (show-paren-mode 1)
+  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+  :delight)
+
+(use-package highlight-symbol
+  :ensure t
+  :config
+  (set-face-background 'highlight-symbol-face (face-background 'highlight))
+  (setq highlight-symbol-idle-delay 0.5)
+  (add-hook 'prog-mode-hook 'highlight-symbol-mode)
+  :bind (("M-n" . highlight-symbol-next)
+         ("M-p" . highlight-symbol-prev))
+  :delight)
+
+(use-package flyspell
+  :ensure t
+  :config
+  ;; Flyspell should be able to learn a word without the
+  ;; `flyspell-correct-word-before-point` pop up.
+  ;; Refer:
+  ;; https://stackoverflow.com/questions/22107182/in-emacs-flyspell-mode-how-to-add-new-word-to-dictionary
+  (defun flyspell-learn-word-at-point ()
+    "Add word at point to list of correct words."
+    (interactive)
+    (let ((current-location (point))
+          (word (flyspell-get-word)))
+      (when (consp word)
+        (flyspell-do-correct 'save nil
+                             (car word) current-location
+                             (cadr word) (caddr word)
+                             current-location))))
+
+  ;; This color is specific to `nord` theme.
+  ;; (set-face-attribute 'flyspell-incorrect nil :underline '(:style line :color "#bf616a"))
+  ;; (set-face-attribute 'flyspell-duplicate nil :underline '(:style line :color "#bf616a"))
+
+  :bind ("H-l" . flyspell-learn-word-at-point)
+  :delight)
+
+;; display possible completions at all places
+(use-package ido-completing-read+
+  :ensure t
+  :config
+  ;; This enables ido in all contexts where it could be useful, not just
+  ;; for selecting buffer and file names
+  (ido-mode t)
+  (ido-everywhere t)
+  ;; This allows partial matches, e.g. "uzh" will match "Ustad Zakir Hussain"
+  (setq ido-enable-flex-matching t)
+  (setq ido-use-filename-at-point nil)
+  ;; Includes buffer names of recently opened files, even if they're not open now.
+  (setq ido-use-virtual-buffers t)
+  :diminish nil)
+
+(use-package gitconfig
+  :ensure t
+  :load-path "pkgs"
+  :config
+  (add-hook 'gitconf-mode-hook
+            (lambda ()
+              (setq indent-line-function #'insert-tab
+                    indent-tabs-mode t))))
+
+(use-package cc-mode
+  :ensure nil
+  :config
+  (defconst gr/c-style
+    '((c-backslash-column . 80)
+      (c-backslash-max-column . 100)
+      (c-basic-offset . 4)
+      (c-continued-statement-offset 4)
+      (c-echo-syntactic-information-p . t)
+      (c-offsets-alist .
+                       ((inextern-lang . 0)
+                        (substatement . 0)
+                        (statement-case-intro . +)
+                        (substatement-open . 0)
+                        (case-label . +)
+                        (block-open . 0))))
+    "C programming style")
+  (defun gr/c-mode-common-hook ()
+    (setq c-tab-always-indent t)
+    (setq c-indent-level 4)               ;; a TAB is equivilent to four spaces
+    (setq c-indent-tabs-mode t)           ;; pressing TAB causes indentation
+    (setq c-argdecl-indent 0)             ;; do not indent argument decl's extra
+    (setq comment-fill-column 120)
+    (setq comment-column 79)
+    (global-set-key (kbd "<f7>") 'compile)
+    (c-set-style "gr")                    ;; custom c-style
+    (c-toggle-hungry-state 1))            ;; hungry delete
+  (c-add-style "gr" gr/c-style)
+  (add-hook 'c-mode-common-hook 'gr/c-mode-common-hook)
+  (add-hook 'c++-mode-common-hook 'gr/c-mode-common-hook))
+
+(use-package org
+  :ensure nil
+  :config
+  (setq-default org-hide-leading-stars t)
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (display-line-numbers-mode -1))))
+
+(use-package magit
+  :bind (("C-x g" . magit-status)
+         ("C-x C-g" . magit-status)))
+
+(use-package rust-mode)
