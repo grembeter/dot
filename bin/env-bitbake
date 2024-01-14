@@ -1,28 +1,6 @@
 # -*- mode: sh -*-
 
-if test -d "$BUILDDIR"; then
-    echo "::::: changing to $BUILDDIR"
-    cd -P "$BUILDDIR"
-elif test -z "$1"; then
-    if test -L "$PWD"/.layersrootenv; then
-        echo "::::: restoring from $PWD/.layersrootenv"
-        . "$PWD"/.layersrootenv "$PWD"
-    fi
-elif test -d "$1"; then
-    if test -L "$1"/.layersrootenv; then
-        echo "::::: restoring from $1/.layersrootenv"
-        . "$1"/.layersrootenv "$1"
-    fi
-elif test -f "$1"; then
-    BUILD_ENV_PATH="$(realpath -s $1)"
-    echo "::::: sourcing $BUILD_ENV_PATH"
-    . "$1" "${@:2}"
-    if test -d "$BUILDDIR"; then
-        ln --symbolic --force "$BUILD_ENV_PATH" "$BUILDDIR"/.layersrootenv
-        echo "::::: symlink is ready $BUILDDIR/.layersrootenv"
-    fi
-    unset BUILD_ENV_PATH
-fi
+. "$PWD"/bitbake-env "$1"
 
 test -d "$BUILDDIR" \
     && test -n "$PROMPT_COLOR_BITBAKE" \
