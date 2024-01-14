@@ -77,6 +77,9 @@ if command -v g-set-prompt > /dev/null; then
     g-set-prompt "$PROMPT_COLOR_DEFAULT"
 fi
 
+GPG_TTY=$(tty)
+export GPG_TTY
+
 #
 # keep the posibility to store some staff apart
 #
