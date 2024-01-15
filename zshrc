@@ -31,13 +31,9 @@ typeset -U path
 path=("$HOME/bin" $path)
 export PATH
 
-g-source-path() {
-    test -f "$1" && source "$1"
-}
-
-g-source-path "$ZDOTDIR/lib/aliases.zsh"
-g-source-path "$ZDOTDIR/lib/main.zsh"
-g-source-path "$ZDOTDIR/lib/completions.zsh"
+source "$HOME/.config/zsh/aliases.zsh"
+source "$HOME/.config/zsh/completions.zsh"
+source "$HOME/.config/zsh/functions.zsh"
 
 if [ -e "$HOME/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE}" ]; then
     source "$HOME/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE}"
@@ -83,7 +79,9 @@ export GPG_TTY
 #
 # keep the posibility to store some staff apart
 #
-g-source-path "$HOME/.config/zshrc"
+if test -f "$HOME/.config/zsh/personal.zsh"; then
+    source "$HOME/.config/zsh/personal.zsh"
+fi
 
 # return true
 :
