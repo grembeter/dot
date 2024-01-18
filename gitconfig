@@ -52,6 +52,8 @@
     xxx = clean -dffx                                      # dangerous
 [pretty]
     nicer = tformat:%C(auto,red)%h %C(auto,bold blue)%<(20)%an%C(auto,reset) %C(auto,green)%>(15)%cr%C(auto,reset) %C(auto,yellow)%d%C(auto,reset) %s
+[commit]
+    gpgSign = true
 
 #
 # keep personal details (user name, email) separately
