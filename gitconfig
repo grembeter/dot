@@ -32,7 +32,7 @@
     fxx = fetch --all -v --prune-tags
     l =  log --format=nicer
     lg = log --format=nicer --graph
-    ll = log --pretty=fuller --decorate
+    ll = log --pretty=fuller --decorate --show-signature
     ls =  log --format=nicer --stat
     ls-ign = ls-files . --exclude-standard --others --ignored
     ls-unt = ls-files . --exclude-standard --others
@@ -43,8 +43,8 @@
     pu = push -n
     pwd = !pwd
     s = status --short --branch
-    so = show --pretty=fuller
-    ss = show --pretty=fuller --stat
+    so = show --pretty=fuller --show-signature
+    ss = show --pretty=fuller --stat --show-signature
     su = status --short --branch --untracked-files=no
     superx = "!f(){ git clean -dffx && git checkout .;};f" # super dangerous
     w = worktree
