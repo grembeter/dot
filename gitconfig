@@ -40,7 +40,7 @@
     pl = pull --rebase --all -v
     plx = pull --rebase --all -v --prune
     pt = fetch --prune origin '+refs/tags/*:refs/tags/*'
-    pu = push -n
+    pu = push --dry-run
     pwd = !pwd
     s = status --short --branch
     so = show --pretty=fuller --show-signature
