@@ -306,3 +306,11 @@
          ("C-x C-g" . magit-status)))
 
 (use-package rust-mode)
+
+(use-package deft
+  :bind ("<f9>" . deft)
+  :commands (deft)
+  :config
+  (setq deft-directory "~/def"
+        deft-auto-save-interval 10.0
+        deft-extensions '("org" "rst" "txt")))
