@@ -295,8 +295,12 @@
 
 (use-package org
   :ensure nil
+  :bind (("C-c a" . org-agenda)
+         :map org-mode-map
+         ("C-u C-c C-l" . org-toggle-link-display))
   :config
-  (setq-default org-hide-leading-stars t)
+  (setq org-hide-leading-stars t
+        org-agenda-files '("~/def"))
   (add-hook 'org-mode-hook
             (lambda ()
               (display-line-numbers-mode -1))))
