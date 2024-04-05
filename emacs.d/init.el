@@ -300,7 +300,8 @@
          ("C-u C-c C-l" . org-toggle-link-display))
   :config
   (setq org-hide-leading-stars t
-        org-agenda-files '("~/def"))
+        org-agenda-files
+        (append (directory-files-recursively "~/def" "org$")))
   (add-hook 'org-mode-hook
             (lambda ()
               (display-line-numbers-mode -1))))
@@ -316,5 +317,6 @@
   :commands (deft)
   :config
   (setq deft-directory "~/def"
+        deft-recursive t
         deft-auto-save-interval 10.0
         deft-extensions '("org" "rst" "txt")))
