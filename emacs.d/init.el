@@ -253,15 +253,6 @@
   (setq ido-use-virtual-buffers t)
   :diminish nil)
 
-(use-package gitconfig
-  :ensure t
-  :load-path "pkgs"
-  :config
-  (add-hook 'gitconf-mode-hook
-            (lambda ()
-              (setq indent-line-function #'insert-tab
-                    indent-tabs-mode t))))
-
 (use-package cc-mode
   :ensure nil
   :config
