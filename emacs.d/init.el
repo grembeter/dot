@@ -306,6 +306,15 @@
             (lambda ()
               (display-line-numbers-mode -1))))
 
+(use-package org-journal
+  :ensure t
+  :bind ("<f8>" . org-journal-new-entry)
+  :commands (org-journal-new-entry)
+  :config
+  (setq org-journal-dir "~/def"
+        org-journal-file-format "%Y%m%d.txt"
+        org-journal-date-format "%A, %d %B %Y"))
+
 (use-package magit
   :bind (("C-x g" . magit-status)
          ("C-x C-g" . magit-status)))

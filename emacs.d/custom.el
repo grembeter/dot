@@ -6,7 +6,7 @@
  '(custom-safe-themes
    '("3a9f65e0004068ecf4cf31f4e68ba49af56993c20258f3a49e06638c825fbfb6" default))
  '(package-selected-packages
-   '(deft gitconfig ido-completing-read+ highlight-symbol rainbow-delimiters projectile delight company ujelly-theme use-package yaml-mode rust-mode notmuch magit)))
+   '(org-journal deft gitconfig ido-completing-read+ highlight-symbol rainbow-delimiters projectile delight company ujelly-theme use-package yaml-mode rust-mode notmuch magit)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
