@@ -315,13 +315,8 @@
         org-journal-file-format "%Y%m%d.txt"
         org-journal-date-format "%A, %d %B %Y"))
 
-(use-package magit
-  :bind (("C-x g" . magit-status)
-         ("C-x C-g" . magit-status)))
-
-(use-package rust-mode)
-
 (use-package deft
+  :ensure t
   :bind ("<f9>" . deft)
   :commands (deft)
   :config
@@ -329,3 +324,11 @@
         deft-recursive t
         deft-auto-save-interval 10.0
         deft-extensions '("org" "rst" "txt")))
+
+(use-package magit
+  :ensure t
+  :bind (("C-x g" . magit-status)
+         ("C-x C-g" . magit-status)))
+
+(use-package rust-mode
+  :ensure t)
