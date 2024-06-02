@@ -20,6 +20,7 @@
     bDx = "!f(){ git branch | awk '$1 != \"*\"' | xargs git branch -D; };f"
     ca = commit --amend
     ch = cherry-pick --edit -s -x
+    chp = cherry-pick
     ci = commit
     co = checkout
     cot = checkout --track
