@@ -104,9 +104,9 @@ g-lsin() {
 
     if [ $# -ne 0 ]; then
         ls --color=never -1 --quoting-style=shell-always -t "$dir"/* \
-            | cat -n | head -n20 | sort -r -n \
-            | awk '$1 == '"$1"' {$1=""; print}'
+            | cat -n | sort -n \
+            | awk -v ORS= '$1 == '"$1"' {$1=""; print}' | xclip -i
     else
-        ls -1 --quoting-style=shell-always -t "$dir" | cat -n | head -n20 | sort -r -n
+        ls -1 --quoting-style=shell-always -t "$dir" | cat -n | sort -n | ${PAGER:-less}
     fi
 }
