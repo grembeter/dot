@@ -1,8 +1,8 @@
-#!/usr/bin/env sh
-
-if command -v xrandr > /dev/null; then
-    xrandr --dpi 141
-fi
+# -*- mode: sh -*-
+#
+# It is intended for setting session-wide environment variables that should
+# apply to all apps.
+#
 
 if command -v emacsclient > /dev/null; then
     VISUAL=$(command -v emacsclient)' -a "" -c'
@@ -14,14 +14,6 @@ if command -v ssh-askpass > /dev/null; then
     export SSH_ASKPASS
 fi
 
-if command -v xset > /dev/null; then
-    xset -b
-fi
-
 if command -v keychain > /dev/null; then
     eval $(keychain --eval --agents ssh --quiet "$HOME/.ssh/"*".key")
-fi
-
-if command -v gxkb > /dev/null; then
-    gxkb &
 fi
