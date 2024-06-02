@@ -1,8 +1,8 @@
 # -*- mode: sh -*-
 
-HISTSIZE=10000              # the maximum number of events stored in the internal
+HISTSIZE=1000000            # the maximum number of events stored in the internal
                             # history list
-SAVEHIST=100000             # the maximum number of history events to save in the
+SAVEHIST=1000000            # the maximum number of history events to save in the
                             # history file
 HISTFILE="$HOME/.zhist"
 
@@ -19,6 +19,12 @@ setopt HIST_IGNORE_ALL_DUPS # if a new command line being added to the history
                             # list duplicates an older one, the older command is
                             # removed from the list (even if it is not the
                             # previous event)
+setopt INC_APPEND_HISTORY   # write to the history file immediately, not when the shell exits
+setopt SHARE_HISTORY        # share history between all sessions
+setopt HIST_EXPIRE_DUPS_FIRST  # expire duplicate entries first when trimming history
+setopt HIST_FIND_NO_DUPS    # do not display a line previously found
+setopt HIST_REDUCE_BLANKS   # remove superfluous blanks before recording entry
+setopt HIST_VERIFY          # do not execute immediately upon history expansion
 setopt NOTIFY               # report the status of background jobs immediately,
                             # rather than waiting until just before printing a
                             # prompt
@@ -66,7 +72,7 @@ if command -v g-chdir-parent > /dev/null; then
     bindkey '^[[1;5A' g-chdir-parent              # C-Up
 fi
 
-# turn off CTRL-S freeze and unblock history-incremental-search-forward
+# turn off C-s freeze and unblock history-incremental-search-forward
 stty -ixon
 
 if command -v g-set-prompt > /dev/null; then
