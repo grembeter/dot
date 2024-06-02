@@ -1,6 +1,7 @@
 # -*- mode: sh -*-
 
-. "$PWD"/bitbake-env "$1"
+test -e "$PWD"/bitbake-env \
+    && . "$PWD"/bitbake-env "$1"
 
 test -d "$BUILDDIR" \
     && test -n "$PROMPT_COLOR_BITBAKE" \
