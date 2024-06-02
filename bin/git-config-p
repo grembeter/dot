@@ -1,4 +1,7 @@
 #!/usr/bin/env sh
+#
+# Git profile switcher
+#
 
 conf="$HOME/.config/git/personal.conf"
 
