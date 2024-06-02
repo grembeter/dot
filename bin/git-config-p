@@ -2,8 +2,9 @@
 
 conf="$HOME/.config/git/personal.conf"
 
-if [ -n "$1" ]; then
+if [ -f $(dirname "$conf")/"$1".conf ]; then
     ln --symbolic --force "$1.conf" "$conf"
-    readlink "$conf"
-    cat "$conf"
+    ls -l "$conf"
 fi
+
+cat "$conf"
