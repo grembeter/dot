@@ -73,7 +73,7 @@
 ;; makes killing/yanking interact with the clipboard
 (setq-default x-select-enable-clipboard t)
 
-;; Save clipboard strings into kill ring before replacing them. When
+;; save clipboard strings into kill ring before replacing them: when
 ;; one selects something in another program to paste it into Emacs, but
 ;; kills something in Emacs before actually pasting it, this selection
 ;; is gone unless this variable is non-nil.
@@ -97,9 +97,6 @@
 (global-unset-key (kbd "C-z"))
 (global-set-key (kbd "C-x w") 'revert-buffer)
 
-;; delete whitespace just when a file is saved
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-
 ;; enable narrowing commands
 (put 'narrow-to-region 'disabled nil)
 (put 'narrow-to-page 'disabled nil)
@@ -111,14 +108,8 @@
 
 (global-set-key (kbd "C-;") 'toggle-comment-on-line)
 
-;; toggle Display-Line-Numbers mode in all buffers
-;; (global-display-line-numbers-mode)
+;; display line numbers
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
-
-;; set cross environment
-(setenv "PATH" (concat
-                "/opt/gcc-arm-none-eabi/bin" ":"
-                (getenv "PATH")))
 
 (require 'use-package)
 
@@ -126,20 +117,16 @@
   :ensure t
   :config
   (setq ispell-program-name "hunspell")
-  ;; (setq-default ispell-local-dictionary "en_US")
-  ;; (setq-default ispell-local-dictionary-alist
-  ;;               '(("en_US" "[[:alpha:]]" "[^[:alpha:]]"
-  ;;                  "[']" nil ("-d" "en_US,de_DE,de_CH,uk_UA")
-  ;;                  nil utf-8)))
   :bind
   (("C-c w" . 'ispell-word)
    ("C-c r" . 'ispell-region)
    ("C-c b" . 'ispell-buffer)))
 
-(use-package ujelly-theme
+(use-package modus-themes
   :ensure t
   :config
-  (load-theme 'ujelly t)
+  ;; (load-theme 'ujelly t)
+  (load-theme 'modus-vivendi t)
   ;; highlight current line in all buffers
   (global-hl-line-mode t)
   ;; give a chance for emacsclient
@@ -147,7 +134,7 @@
             (lambda (frame)
               (select-frame frame)
               (when (display-graphic-p frame)
-                (load-theme 'ujelly t)))))
+                (load-theme 'modus-vivendi t)))))
 
 (use-package company
   :ensure t
@@ -213,43 +200,18 @@
          ("M-p" . highlight-symbol-prev))
   :delight)
 
-(use-package flyspell
-  :ensure t
-  :config
-  ;; Flyspell should be able to learn a word without the
-  ;; `flyspell-correct-word-before-point` pop up.
-  ;; Refer:
-  ;; https://stackoverflow.com/questions/22107182/in-emacs-flyspell-mode-how-to-add-new-word-to-dictionary
-  (defun flyspell-learn-word-at-point ()
-    "Add word at point to list of correct words."
-    (interactive)
-    (let ((current-location (point))
-          (word (flyspell-get-word)))
-      (when (consp word)
-        (flyspell-do-correct 'save nil
-                             (car word) current-location
-                             (cadr word) (caddr word)
-                             current-location))))
-
-  ;; This color is specific to `nord` theme.
-  ;; (set-face-attribute 'flyspell-incorrect nil :underline '(:style line :color "#bf616a"))
-  ;; (set-face-attribute 'flyspell-duplicate nil :underline '(:style line :color "#bf616a"))
-
-  :bind ("H-l" . flyspell-learn-word-at-point)
-  :delight)
-
 ;; display possible completions at all places
 (use-package ido-completing-read+
   :ensure t
   :config
-  ;; This enables ido in all contexts where it could be useful, not just
+  ;; this enables ido in all contexts where it could be useful, not just
   ;; for selecting buffer and file names
   (ido-mode t)
   (ido-everywhere t)
-  ;; This allows partial matches, e.g. "uzh" will match "Ustad Zakir Hussain"
+  ;; this allows partial matches
   (setq ido-enable-flex-matching t)
   (setq ido-use-filename-at-point nil)
-  ;; Includes buffer names of recently opened files, even if they're not open now.
+  ;; includes buffer names of recently opened files, even if they're not open now
   (setq ido-use-virtual-buffers t)
   :diminish nil)
 
@@ -303,7 +265,7 @@
   :commands (org-journal-new-entry)
   :config
   (setq org-journal-dir "~/def"
-        org-journal-file-format "%Y%m%d.txt"
+        org-journal-file-format "journal-%Y%m%d.txt"
         org-journal-date-format "%A, %d %B %Y"))
 
 (use-package deft
