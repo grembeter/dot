@@ -50,7 +50,8 @@ alias fni='find . -iname'
 alias cal='ncal -Mb'
 alias grep='grep --color'
 alias xclip='xclip -selection clipboard'
-alias bat='batcat'
+
+alias t='batcat'
 
 alias g='git'
 alias gdif='git diff --no-index'
