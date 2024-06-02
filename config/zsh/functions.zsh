@@ -37,10 +37,13 @@ g-chdir-repo() {
 }
 
 #
-# show path to bitbake packages work dir
+# go to bitbake packages work dir
 #
-g-list-work() {
-    ls --directory "${BUILDDIR:-$PWD}/${2:-tmp}"/work/*/$1/*
+g-chdir-work() {
+    for w in "${BUILDDIR:-$PWD}/${2:-tmp}"/work/*/$1/*; do
+        test -d "$w" && chdir -P "$w"
+        break
+    done
 }
 
 #
