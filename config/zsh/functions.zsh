@@ -23,35 +23,6 @@ g-chdir-parent() {
 }
 
 #
-# run terminal emulation program with predefined device and baudrate
-#
-g-ttyusb() {
-    local ttydev="${1:-0}"
-    local baudrate="${2:-115200}"
-
-    if echo "$ttydev" | grep -qEe '^[0-9]+$'; then
-        ttydev="/dev/ttyUSB$ttydev"
-    fi
-
-    # map LF to CR+LF after being read from the serial port
-    # map CR to LF before being written to the serial port
-    picocom --imap lfcrlf --omap crlf \
-            --logfile /tmp/picocom.$(basename "$ttydev").log \
-            --baud "$baudrate" \
-            "$ttydev"
-}
-
-#
-# list serial devices
-#
-g-ttyusbls() {
-    local ttydev
-    for ttydev in /dev/serial/by-id/*; do
-        echo "$(readlink -f $ttydev) # $ttydev"
-    done
-}
-
-#
 # move to layers root dir
 #
 # A convenient way to move to repo directory in bitbake environment.

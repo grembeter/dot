@@ -20,12 +20,6 @@ alias 2b='. env-bitbake'
 alias 2t='. env-toolchain'
 alias 2s='g-chdir-repo'
 
-alias 3='g-ttyusb'
-alias 3l='g-ttyusbls'
-alias 3o='lsof /dev/ttyUSB?'
-alias 3x='ls --color -l /tmp/picocom.*.log'
-alias 3xxx='rm -vf /tmp/picocom.*.log'
-
 alias 5s='repo sync --no-clone-bundle --verbose'
 
 alias cd='cd -P'
