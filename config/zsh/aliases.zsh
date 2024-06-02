@@ -42,7 +42,7 @@ alias em='emacsclient -a "" -c -n'
 alias emt='emacsclient -a "" -t'
 alias emx='emacsclient -a "" -c'
 
-alias h='cat $HISTFILE | grep --color -E -e'
+alias h='history 0 | grep --color -Ee'
 alias df='df --human-readable --print-type --portability'
 alias fx='find . -type f -print0 | xargs -n10 -0 grep --color -nH'
 alias fn='find . -name'
