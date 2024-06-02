@@ -1,0 +1,27 @@
+#!/usr/bin/env sh
+#
+# Set backlight brightness
+#
+
+sysfs=/sys/class/backlight/intel_backlight
+brightness_default="5000"
+brightness_min="50"
+brightness_max=$(cat "$sysfs"/max_brightness)
+brightness=$(cat "$sysfs"/brightness)
+step="500"
+
+if [ "$1" = "down" ]; then
+    brightness=$(($brightness-$step))
+elif [ "$1" = "up" ]; then
+    brightness=$(($brightness+$step))
+else
+    brightness="$brightness_default"
+fi
+
+if [ "$brightness" -gt "$brightness_max" ]; then
+    brightness="$brightness_max"
+elif [ "$brightness" -lt "$brightness_min" ]; then
+    brightness="$brightness_min"
+fi
+
+echo "$brightness" > "$sysfs"/brightness
