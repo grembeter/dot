@@ -1,4 +1,7 @@
 # -*- mode: sh -*-
+#
+# Set up BitBake environment
+#
 
 test -e "$PWD"/bitbake-env \
     && . "$PWD"/bitbake-env "$1"
