@@ -1,0 +1,202 @@
+#!/usr/bin/env sh
+#
+# Manipulate dot files links
+#
+
+DOTDIR="$HOME"
+
+##################################################
+#
+# print usage message
+#
+##################################################
+usage() {
+    local script_name=$(basename -- "$0")
+
+    sed -r -e 's/^.*%%% ?//' <<USAGE >&2
+    %%% usage: $script_name [-h] [-d DIR] {install | remove | status}
+    %%%
+    %%% Manipulate dot files symlinks.
+    %%%
+    %%% actions:
+    %%%   install                    create symlinks
+    %%%   remove                     remove symlinks
+    %%%   status                     show symlinks status (default)
+    %%%
+    %%% options:
+    %%%   -h, --help                 show this help message and exit
+    %%%   -d, --dotdir DIR           dot directory where to install all symlinks,
+    %%%                              default is "\$HOME"
+    %%%
+    %%% example:
+    %%%     $script_name --dotdir /tmp/test/123 install
+    %%%     $script_name --dotdir /tmp/test/123 status
+    %%%     $script_name --dotdir /tmp/test/123 remove
+    %%%
+USAGE
+}
+
+
+##################################################
+#
+# create symlink in $DOTDIR
+#
+# Link path is prepended with "." by default
+#
+##################################################
+create_link() {
+    if test -z "$1"; then
+        echo " !!! target name is empty, nothing to do"
+        return
+    fi
+
+    if test ! -e "$PWD/$1"; then
+        echo " !!! tagret path $PWD/$1 does not exist, nothing to do"
+        return
+    fi
+
+    linkpath="$DOTDIR/${2:-.$1}"
+    mkdir -p $(dirname "$linkpath")
+    ln --no-target-directory --symbolic --verbose --force "$PWD/$1" "$linkpath"
+}
+
+##################################################
+#
+# remove symlink in $DOTDIR
+#
+# Does nothing if link path does not match real file in git directory
+#
+##################################################
+remove_link() {
+    linkpath="$DOTDIR/${2:-.$1}"
+
+    if test ! -L "$linkpath"; then
+        echo " !!! $linkpath is not a symlink, nothing to do"
+        return
+    fi
+
+    target=$(readlink -e "$linkpath")
+
+    if test -z "$target"; then
+        echo " !!! $linkpath is broken, nothing to do"
+        return
+    fi
+
+    if test "$target" = "$PWD/$1"; then
+        rm -vf "$linkpath"
+    else
+        echo " !!! $target is unknown, nothing to do"
+    fi
+}
+
+##################################################
+#
+# show symlink status in $DOTDIR
+#
+##################################################
+status_link() {
+    linkpath="$DOTDIR/${2:-.$1}"
+
+    if test ! -L "$linkpath"; then
+        echo " !!! $linkpath is not a symlink"
+        return
+    fi
+
+    target=$(readlink -e "$linkpath")
+
+    if test -z "$target"; then
+        echo " !!! $linkpath is broken"
+        return
+    fi
+
+    if test "$target" = "$PWD/$1"; then
+        echo "ok, looks good for $linkpath"
+    else
+        echo " !!! $target is unknown"
+    fi
+}
+
+##################################################
+#
+# main entry
+#
+##################################################
+dotit() {
+    local action="status_link"
+
+    while [ $# -gt 0 ]; do
+        case "$1" in
+            -h|--help)
+                usage
+                return 0
+                ;;
+            install)
+                action="create_link"
+                ;;
+            remove)
+                action="remove_link"
+                ;;
+            status)
+                action="status_link"
+                ;;
+            -d|--dotdir)
+                DOTDIR="$2"
+                shift
+                ;;
+            --)
+                shift
+                break
+                ;;
+            *)
+                echo "error: unknown argument: '$1'" >&2
+                return 13
+                ;;
+        esac
+
+        shift
+    done
+
+    cd $(dirname $(readlink -e "$0"))
+
+    # ****************
+    # * $DOTDIR/bin/ *
+    # ****************
+
+    "$action" bin/backlight bin/backlight
+    "$action" bin/env-bitbake bin/env-bitbake
+    "$action" bin/env-toolchain bin/env-toolchain
+    "$action" bin/git-config-p bin/git-config-p
+
+    # ***********************
+    # * $DOTDIR/.config/i3/ *
+    # ***********************
+
+    "$action" config/i3/config
+
+    # ************************
+    # * $DOTDIR/.config/zsh/ *
+    # ************************
+
+    "$action" config/zsh/aliases.zsh
+    "$action" config/zsh/completions.zsh
+    "$action" config/zsh/functions.zsh
+
+    # *********************
+    # * $DOTDIR/.emacs.d/ *
+    # *********************
+
+    "$action" emacs.d/custom.el
+    "$action" emacs.d/init.el
+
+    # *************
+    # * $DOTDIR/. *
+    # *************
+
+    "$action" gitconfig
+    "$action" vimrc
+    "$action" Xresources
+    "$action" xsessionrc
+    "$action" zshrc
+}
+
+dotit "$@"
