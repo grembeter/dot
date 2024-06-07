@@ -9,9 +9,12 @@ PROMPT_COLOR_BAREMETAL="011"
 g-set-prompt() {
     local color="${1:-$PROMPT_COLOR_DEFAULT}"
     local mark="${2:-»}"
+    local prompt_date='%F{010}%D{%H:%M}%f'
+    local prompt_true='%F{'"${color}"'}##%f '"$prompt_date"' %F{'"${color}"'}%m%f %F{015}'"${mark}"'%f'
+    local prompt_false='%F{009}??%f '"$prompt_date"' %F{'"${color}"'}%m%f %F{009}✗%f'
 
-    prompt='%(?.%F{'"${color}"'}## %m %F{015}'"${mark}"'%f.%F{009}?? %F{'"${color}"'}%m %F{009}✗%f) %F{010}%/%f
- ; '
+    prompt="%(?.${prompt_true}.${prompt_false}) %F{010}%/%f
+ ; "
 }
 
 #
