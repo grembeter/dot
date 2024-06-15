@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+#
+# Toggle the mute status of the default source (mic):
+#  - create an empty "mic-unmuted" file in "/var/run/lock" if mic is ON
+#  - remove "mic-unmuted" if mic is OFF (muted)
+#
+
+import pathlib
+import pulsectl
+
+
+unmuted = pathlib.Path("/var/run/lock/mic-unmuted")
+pulse = pulsectl.Pulse("micmute")
+mic = pulse.get_source_by_name(pulse.server_info().default_source_name)
+
+if mic.mute:
+    pulse.mute(mic, mute=False)
+    unmuted.touch()
+else:
+    pulse.mute(mic, mute=True)
+    unmuted.unlink(missing_ok=True)
