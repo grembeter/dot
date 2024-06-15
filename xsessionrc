@@ -11,6 +11,11 @@ if command -v emacsclient > /dev/null; then
     export ALTERNATE_EDITOR EDITOR VISUAL
 fi
 
+if command -v batcat > /dev/null; then
+    VIEWER=$(command -v batcat)
+    export VIEWER
+fi
+
 if command -v ssh-askpass > /dev/null; then
     SSH_ASKPASS=$(command -v ssh-askpass)
     export SSH_ASKPASS
