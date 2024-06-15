@@ -27,6 +27,8 @@ bindsym XF86AudioMicMute exec --no-startup-id $HOME/bin/micmute && $refresh_i3st
 bindsym XF86MonBrightnessUp exec --no-startup-id $HOME/bin/backlight up
 bindsym XF86MonBrightnessDown exec --no-startup-id $HOME/bin/backlight down
 
+bindsym XF86Display exec --no-startup-id xlayoutdisplay --quiet
+
 # use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
