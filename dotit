@@ -166,6 +166,7 @@ dotit() {
     "$action" bin/env-bitbake bin/env-bitbake
     "$action" bin/env-toolchain bin/env-toolchain
     "$action" bin/git-config-p bin/git-config-p
+    "$action" bin/micmute bin/micmute
 
     # ***********************
     # * $DOTDIR/.config/i3/ *
