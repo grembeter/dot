@@ -5,8 +5,10 @@
 #
 
 if command -v emacsclient > /dev/null; then
-    VISUAL=$(command -v emacsclient)' -a "" -c'
-    export VISUAL
+    ALTERNATE_EDITOR=""
+    EDITOR=$(command -v emacsclient)
+    VISUAL=$(command -v emacsclient)' -c'
+    export ALTERNATE_EDITOR EDITOR VISUAL
 fi
 
 if command -v ssh-askpass > /dev/null; then
