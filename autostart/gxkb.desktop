@@ -1,0 +1,5 @@
+[Desktop Entry]
+Exec=/usr/bin/gxkb
+Name=gxkb
+Comment=X11 keyboard indicator and switcher
+Type=Application
