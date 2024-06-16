@@ -1,0 +1,4 @@
+[usb device]
+pattern = usb([0-9]*)
+device = /dev/ttyUSB%s
+baudrate = 115200
