@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+set -o xtrace
+set -o errexit
+
+SRCDIR="$(xdg-user-dir DOCUMENTS)fb2"
+DSTDIR=$(readlink -e "/media/$USER/PB617")
+
+test -d "$SRCDIR" && test -d "$DSTDIR" \
+    && command rsync --archive --update --verbose --delete --stats --info=progress2 "$SRCDIR"/ "$DSTDIR"/fb2 "$@"
