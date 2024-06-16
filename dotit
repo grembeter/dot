@@ -168,6 +168,12 @@ dotit() {
     "$action" bin/git-config-p bin/git-config-p
     "$action" bin/micmute bin/micmute
 
+    # ************************
+    # * $DOTDIR/.config/bat/ *
+    # ************************
+
+    "$action" config/bat/config
+
     # ***********************
     # * $DOTDIR/.config/i3/ *
     # ***********************
