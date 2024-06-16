@@ -181,6 +181,12 @@ dotit() {
 
     "$action" config/i3/config
 
+    # *****************************
+    # * $DOTDIR/.config/i3status/ *
+    # *****************************
+
+    "$action" config/i3status/config
+
     # ************************
     # * $DOTDIR/.config/zsh/ *
     # ************************
