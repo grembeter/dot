@@ -165,6 +165,7 @@ dotit() {
     "$action" bin/backlight bin/backlight
     "$action" bin/env-bitbake bin/env-bitbake
     "$action" bin/env-toolchain bin/env-toolchain
+    "$action" bin/fbsync bin/fbsync
     "$action" bin/git-config-p bin/git-config-p
     "$action" bin/micmute bin/micmute
 
