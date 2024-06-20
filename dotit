@@ -211,6 +211,12 @@ dotit() {
     "$action" config/zsh/completions.zsh
     "$action" config/zsh/functions.zsh
 
+    # ********************
+    # * $DOTDIR/.config/ *
+    # ********************
+
+    "$action" config/user-dirs.dirs
+
     # *********************
     # * $DOTDIR/.emacs.d/ *
     # *********************
