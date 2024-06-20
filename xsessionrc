@@ -22,5 +22,5 @@ if command -v ssh-askpass > /dev/null; then
 fi
 
 if command -v keychain > /dev/null; then
-    eval $(keychain --eval --agents gpg,ssh --quiet "$HOME/.ssh/"*".key" 4191E629C11EEB98)
+    eval $(keychain --eval --agents gpg,ssh --quiet "$HOME/.ssh/"*".key" D17DEA2661EB213B)
 fi
