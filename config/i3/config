@@ -48,6 +48,9 @@ bindsym $mod+Shift+Return kill
 # start a modern dmenu replacement - rofi (a program launcher)
 bindsym $mod+Return exec "rofi -modi drun,run -show drun"
 
+# activate a screen saver
+bindsym $mod+Escape exec xset s activate
+
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down
