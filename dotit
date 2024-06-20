@@ -224,9 +224,9 @@ dotit() {
     "$action" emacs.d/custom.el
     "$action" emacs.d/init.el
 
-    # ******************
-    # * $DOTDIR/gnupg/ *
-    # ******************
+    # *******************
+    # * $DOTDIR/.gnupg/ *
+    # *******************
 
     "$action" gnupg/gpg.conf
     "$action" gnupg/gpg-agent.conf
