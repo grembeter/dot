@@ -169,6 +169,16 @@ dotit() {
     "$action" bin/git-config-p bin/git-config-p
     "$action" bin/micmute bin/micmute
 
+    # ******************************
+    # * $DOTDIR/.config/autostart/ *
+    # ******************************
+
+    "$action" config/autostart/emacs.desktop
+    "$action" config/autostart/gxkb.desktop
+    "$action" config/autostart/pulseaudio.desktop
+    "$action" config/autostart/udiskie.desktop
+    "$action" config/autostart/xss-lock.desktop
+
     # ************************
     # * $DOTDIR/.config/bat/ *
     # ************************
