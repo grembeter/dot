@@ -1,0 +1,5 @@
+[Desktop Entry]
+Exec=/usr/bin/xss-lock --transfer-sleep-lock -- i3lock --nofork --color=FFDD00
+Name=xss-lock
+Comment=use external locker as X screen saver
+Type=Application
