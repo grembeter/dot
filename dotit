@@ -203,6 +203,12 @@ dotit() {
 
     "$action" config/tio/config
 
+    # *************************
+    # * $DOTDIR/.config/tmux/ *
+    # *************************
+
+    "$action" config/tmux/tmux.conf
+
     # ************************
     # * $DOTDIR/.config/zsh/ *
     # ************************
