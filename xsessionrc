@@ -22,5 +22,6 @@ if command -v ssh-askpass > /dev/null; then
 fi
 
 if command -v keychain > /dev/null; then
-    eval $(keychain --eval --agents gpg,ssh --quiet "$HOME/.ssh/"*".key" D17DEA2661EB213B)
+    test -f "$HOME/.config/personal.env" && . "$HOME/.config/personal.env"
+    eval $(keychain --eval --agents gpg,ssh --quiet "$HOME/.ssh/"*".key" "$PERSONAL_GPG_KEY")
 fi
