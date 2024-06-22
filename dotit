@@ -234,6 +234,8 @@ dotit() {
     # * $DOTDIR/.gnupg/ *
     # *******************
 
+    test action = "create_link" && mkdir -m 0700 -p "$DOTDIR/.gnupg"
+
     "$action" gnupg/gpg.conf
     "$action" gnupg/gpg-agent.conf
 
