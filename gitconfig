@@ -51,6 +51,8 @@
     w = worktree
     x = clean -dffx -n
     xxx = clean -dffx                                      # dangerous
+[advice]
+    skippedCherryPicks = false
 [pretty]
     nicer = tformat:%C(auto,red)%h %C(auto,bold blue)%<(20)%an%C(auto,reset) %C(auto,green)%>(15)%cr%C(auto,reset) %C(auto,yellow)%d%C(auto,reset) %s
 [commit]
