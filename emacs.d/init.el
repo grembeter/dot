@@ -235,7 +235,6 @@
   (defun gr/c-mode-common-hook ()
     (setq c-tab-always-indent t)          ;; pressing TAB causes indentation
     (setq c-indent-level 4)               ;; a TAB is equivilent to four spaces
-    (setq c-indent-tabs-mode t)
     (setq c-argdecl-indent 0)             ;; do not indent argument decl's extra
     (setq comment-fill-column 120)
     (setq comment-column 79)
