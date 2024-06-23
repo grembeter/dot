@@ -217,6 +217,7 @@
 
 (use-package cc-mode
   :ensure nil
+  :bind ("<f7>" . compile)
   :config
   (defconst gr/c-style
     '((c-backslash-column . 80)
@@ -238,7 +239,6 @@
     (setq c-argdecl-indent 0)             ;; do not indent argument decl's extra
     (setq comment-fill-column 120)
     (setq comment-column 79)
-    (global-set-key (kbd "<f7>") 'compile)
     (c-set-style "gr")                    ;; custom c-style
     (c-toggle-hungry-state 1))            ;; hungry delete
   (c-add-style "gr" gr/c-style)
