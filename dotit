@@ -221,6 +221,7 @@ dotit() {
     # * $DOTDIR/.config/ *
     # ********************
 
+    "$action" config/mimeapps.list
     "$action" config/user-dirs.dirs
 
     # *********************
