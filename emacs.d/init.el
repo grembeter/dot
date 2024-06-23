@@ -227,7 +227,7 @@
       (c-echo-syntactic-information-p . t)
       (c-offsets-alist .
                        ((inextern-lang . 0)
-                        (substatement . 0)
+                        (substatement . +)
                         (statement-case-intro . +)
                         (substatement-open . 0)
                         (case-label . +)
