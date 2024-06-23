@@ -217,6 +217,10 @@
 
 (use-package cc-mode
   :ensure nil
+  :bind ("<f6>" . (lambda () (interactive)
+                    (setq indent-tabs-mode
+                          (not (symbol-value indent-tabs-mode)))
+                    (message "TABS %s" (symbol-value indent-tabs-mode))))
   :bind ("<f7>" . compile)
   :config
   (defconst gr/c-style
