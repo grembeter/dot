@@ -185,6 +185,12 @@ dotit() {
 
     "$action" config/bat/config
 
+    # *************************
+    # * $DOTDIR/.config/gxkb/ *
+    # *************************
+
+    "$action" config/gxkb/gxkb.cfg
+
     # ***********************
     # * $DOTDIR/.config/i3/ *
     # ***********************
