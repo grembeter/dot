@@ -109,6 +109,7 @@ g-lsin() {
         ls --color=never -1 --quoting-style=shell-always -t "$dir"/* \
             | cat -n | sort -n \
             | awk -v ORS= '$1 == '"$1"' {$1=""; print}' | xclip -i
+        printf "%s\n" $(xclip -o)
     else
         ls -1 --quoting-style=shell-always -t "$dir" | cat -n | sort -n | ${PAGER:-less}
     fi
