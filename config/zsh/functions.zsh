@@ -103,7 +103,7 @@ g-ipk-depends() {
 # list the newest files in downloads
 #
 g-lsin() {
-    local dir="$HOME/in"
+    local dir="$(xdg-user-dir DOWNLOAD)"
 
     if [ $# -ne 0 ]; then
         ls --color=never -1 --quoting-style=shell-always -t "$dir"/* \
