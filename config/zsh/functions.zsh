@@ -44,7 +44,10 @@ g-chdir-repo() {
 #
 g-chdir-work() {
     for w in "${BUILDDIR:-$PWD}/${2:-tmp}"/work/*/$1/*; do
-        test -d "$w" && chdir -P "$w"
+        test -d "$w" || continue
+
+        chdir -P "$w"
+        zle reset-prompt
         break
     done
 }
